@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esencia Estética &amp; Spa · Ejemplo de Benemeo Studio</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Ejemplo de una web hecha por Benemeo Studio para un centro de estética: masajes, faciales, cejas, pestañas y maquillaje, con precios y reserva por WhatsApp.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/ejemplos.css?v=20261116c">
+  <style>
+    /* Esencia Estética & Spa: lila, menta y crema; títulos con serif */
+    .spa { --lila:#6c54b4; --lila-2:#4f3a92; --menta:#e3f4f1; --menta-2:#bfe5dd; --crema:#fbf8f4; --tinta:#2d2450; --gris:#5e5872; --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+      background:var(--crema); color:var(--tinta); }
+    .spa * { cursor:auto; }
+    .spa a, .spa button, .spa summary, .spa select, .spa label { cursor:pointer; }
+    .spa .wrap { max-width:1160px; }
+    .s-h { font-family:var(--serif); font-weight:500; letter-spacing:-.01em; line-height:1.08; margin:0; }
+    .s-h em { font-style:italic; color:var(--lila); }
+    .s-eye { text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; color:var(--lila); margin:0 0 .8rem; }
+    .s-lead { color:var(--gris); font-size:1.12rem; max-width:34em; }
+    .s-btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; padding:.7rem 1.5rem; border-radius:999px; background:var(--lila); color:#fff; font:inherit; font-weight:600; text-decoration:none; border:0; transition:background .25s, transform .25s; }
+    .s-btn:hover { background:var(--lila-2); transform:translateY(-2px); }
+    .s-btn--line { background:transparent; color:var(--tinta); border:1.5px solid rgba(45,36,80,.25); }
+    .s-btn--line:hover { background:#fff; color:var(--tinta); }
+
+    /* Cabecera */
+    .s-head { position:sticky; top:0; z-index:20; background:rgba(251,248,244,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(45,36,80,.08); }
+    .s-head .wrap { display:flex; align-items:center; gap:1.5rem; min-height:76px; }
+    .s-logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--tinta); line-height:1.1; }
+    .s-logo img { width:50px; height:50px; }
+    .s-logo b { display:block; font-family:var(--serif); font-weight:600; font-size:1.25rem; }
+    .s-logo small { display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gris); }
+    .s-nav { margin-left:auto; display:flex; gap:1.5rem; }
+    .s-nav a { color:var(--tinta); text-decoration:none; font-size:.95rem; }
+    .s-nav a:hover { color:var(--lila); }
+    .s-head .s-btn { min-height:44px; padding:.5rem 1.2rem; font-size:.95rem; }
+
+    /* Portada */
+    .s-hero { padding:clamp(2.5rem,6vw,5rem) 0 clamp(3rem,7vw,6rem); }
+    .s-hero .wrap { display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(2rem,5vw,4.5rem); align-items:center; }
+    .s-hero h1 { font-size:clamp(2.8rem,1.5rem + 5vw,5.2rem); margin-bottom:1.2rem; }
+    .s-cta { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.8rem 0 2rem; }
+    .s-trust { display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; margin:0; padding:0; list-style:none; color:var(--gris); font-size:.95rem; }
+    .s-trust li { display:flex; align-items:center; gap:.45rem; }
+    .s-trust li::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--menta-2); box-shadow:0 0 0 3px var(--menta); }
+    .s-photo { position:relative; }
+    .s-photo img, .s-photo video { display:block; width:100%; height:auto; max-height:min(78vh,640px); aspect-ratio:4/5; object-fit:cover; object-position:50% 35%; border-radius:240px 240px 28px 28px; box-shadow:0 30px 60px -30px rgba(45,36,80,.45); }
+    .s-float { position:absolute; left:-1.6rem; bottom:2rem; max-width:15.5rem; background:#fff; border-radius:20px; padding:1rem 1.2rem; box-shadow:0 18px 40px -18px rgba(45,36,80,.4); margin:0; }
+    .s-float { display:flex; gap:.9rem; align-items:center; max-width:21rem !important; padding:.8rem !important; }
+    .s-float img { width:96px; height:96px; flex:none; object-fit:cover; object-position:45% 40%; border-radius:14px; }
+    .s-float p { margin:0; }
+    .s-float b { display:block; font-family:var(--serif); font-size:1.15rem; color:var(--lila); }
+    .s-float span { display:block; font-size:.9rem; color:var(--gris); line-height:1.4; }
+
+    /* Secciones */
+    .s-sec { scroll-margin-top:76px; padding:clamp(3.5rem,8vw,6.5rem) 0; }
+    .s-sec--menta { background:var(--menta); }
+    .s-sec h2 { font-size:clamp(2rem,1.3rem + 2.8vw,3.2rem); margin-bottom:.8rem; }
+    .s-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:1rem 2rem; margin-bottom:2.4rem; }
+    .s-top .s-lead { margin:0; }
+
+    /* Servicios con precios */
+    .s-services { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+    .s-card { background:#fff; border-radius:24px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 20px 40px -32px rgba(45,36,80,.5); }
+    .s-card img, .s-card video { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+    .s-media { overflow:hidden; }
+    .s-card:hover img, .s-card:hover video { transform:scale(1.07); }
+    .s-card { transition:transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+    .s-card:hover { transform:translateY(-6px); box-shadow:0 30px 50px -30px rgba(45,36,80,.55); }
+    .s-card > div:not(.s-media) { padding:1.4rem 1.5rem 1.6rem; display:flex; flex-direction:column; gap:.5rem; flex:1; }
+    .s-card h3 { font-family:var(--serif); font-weight:600; font-size:1.45rem; margin:0; }
+    .s-card p { margin:0; color:var(--gris); }
+    .s-prices { list-style:none; margin:.4rem 0 0; padding:0; }
+    .s-prices li { display:flex; align-items:baseline; gap:.5rem; padding:.45rem 0; border-bottom:1px dashed rgba(45,36,80,.15); font-size:.95rem; }
+    .s-prices li span { color:var(--gris); }
+    .s-prices li small { color:var(--gris); opacity:.8; white-space:nowrap; }
+    .s-prices li b { margin-left:auto; color:var(--lila-2); white-space:nowrap; }
+    .s-card a { margin-top:auto; padding-top:.8rem; font-weight:600; color:var(--lila); text-decoration:none; min-height:44px; display:inline-flex; align-items:center; }
+    .s-note { margin:1.6rem 0 0; color:var(--gris); font-size:.92rem; }
+
+    /* Paquetes */
+    .s-packs { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+    .s-pack { background:#fff; border-radius:24px; padding:1.8rem; display:flex; flex-direction:column; gap:.6rem; border:1.5px solid transparent; }
+    .s-pack--star { border-color:var(--lila); position:relative; }
+    .s-pack--star::before { content:"El más pedido"; position:absolute; top:-.8rem; left:1.6rem; background:var(--lila); color:#fff; font-size:.75rem; font-weight:700; padding:.25rem .8rem; border-radius:999px; }
+    .s-pack h3 { font-family:var(--serif); font-weight:600; font-size:1.4rem; margin:0; }
+    .s-pack ul { margin:0; padding-left:1.1rem; color:var(--gris); }
+    .s-pack .s-price { font-family:var(--serif); font-size:2rem; color:var(--lila-2); margin:.3rem 0 0; }
+    .s-pack .s-price small { font-family:inherit; font-size:.9rem; color:var(--gris); text-decoration:line-through; margin-left:.4rem; }
+    .s-pack a { margin-top:auto; }
+
+    /* Cómo reservar */
+    .s-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; counter-reset:paso; margin:0; padding:0; list-style:none; }
+    .s-steps li { background:#fff; border-radius:24px; padding:1.8rem; counter-increment:paso; }
+    .s-steps li::before { content:counter(paso); display:grid; place-items:center; width:2.6rem; height:2.6rem; border-radius:50%; background:var(--lila); color:#fff; font-weight:700; margin-bottom:1rem; }
+    .s-steps h3 { font-family:var(--serif); font-weight:600; font-size:1.3rem; margin:0 0 .4rem; }
+    .s-steps p { margin:0; color:var(--gris); }
+
+    /* Frase con foto */
+    .s-band { position:relative; padding:clamp(5rem,12vw,9rem) 0; color:#fff; background:#3a2d63 url("../assets/ejemplo-spa/lavanda.jpg") center/cover; }
+    .s-band::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(45,36,80,.85),rgba(45,36,80,.35)); }
+    .s-band .wrap { position:relative; }
+    .s-band p { font-family:var(--serif); font-style:italic; font-size:clamp(1.9rem,1.2rem + 3vw,3.4rem); line-height:1.15; max-width:16em; margin:0; }
+
+    /* Galería */
+    .s-gal { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:repeat(2,minmax(160px,15vw)); gap:1rem; }
+    .s-gal img { width:100%; height:100%; object-fit:cover; border-radius:20px; display:block; }
+    .s-gal img:first-child { grid-row:span 2; }
+    .s-gal img { transition:transform .7s cubic-bezier(.2,.7,.2,1), filter .7s; }
+    .s-gal img:hover { transform:scale(1.03); filter:saturate(1.15); }
+
+    /* Preguntas */
+    .s-faq { max-width:820px; }
+    .s-faq details { border-bottom:1px solid rgba(45,36,80,.12); }
+    .s-faq summary { list-style:none; display:flex; justify-content:space-between; gap:1rem; align-items:center; padding:1.2rem 0; font-weight:600; font-size:1.08rem; min-height:44px; }
+    .s-faq summary::-webkit-details-marker { display:none; }
+    .s-faq summary::after { content:"+"; font-size:1.5rem; color:var(--lila); transition:transform .25s; }
+    .s-faq details[open] summary::after { transform:rotate(45deg); }
+    .s-faq p { margin:0 0 1.2rem; color:var(--gris); }
+
+    /* Reserva, horario y ubicación */
+    .s-book .wrap { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(2rem,5vw,4rem); align-items:start; }
+    .s-info { display:grid; gap:1rem; margin-top:1.8rem; }
+    .s-info section { background:#fff; border-radius:20px; padding:1.2rem 1.4rem; }
+    .s-info h3 { font-family:var(--serif); font-weight:600; font-size:1.15rem; margin:0 0 .5rem; color:var(--lila-2); }
+    .s-info p { margin:0; color:var(--gris); }
+    .s-hours { width:100%; border-collapse:collapse; font-size:.95rem; }
+    .s-hours td { padding:.25rem 0; color:var(--gris); }
+    .s-hours td + td { text-align:right; color:var(--tinta); font-weight:600; }
+    .s-form { background:#fff; border-radius:28px; padding:clamp(1.4rem,3vw,2.2rem); display:grid; grid-template-columns:1fr 1fr; gap:1rem; box-shadow:0 30px 60px -40px rgba(45,36,80,.5); }
+    .s-form label { display:grid; gap:.35rem; font-weight:600; font-size:.92rem; }
+    .s-form .full { grid-column:1/-1; }
+    .s-form input, .s-form select { font:inherit; min-height:48px; padding:.6rem .9rem; border-radius:14px; border:1.5px solid rgba(45,36,80,.18); background:var(--crema); color:var(--tinta); width:100%; box-sizing:border-box; }
+    .s-form input:focus, .s-form select:focus { outline:3px solid var(--menta-2); border-color:var(--lila); }
+    .s-form .s-pay { grid-column:1/-1; margin:0; font-size:.9rem; color:var(--gris); }
+    .s-agenda { border:0; padding:0; margin:0; min-width:0; }
+    .s-agenda legend { font-weight:600; font-size:.92rem; margin-bottom:.6rem; padding:0; }
+    .s-days { display:flex; gap:.5rem; overflow-x:auto; padding-bottom:.4rem; margin-bottom:.8rem; }
+    .s-days button { flex:0 0 auto; min-width:64px; min-height:60px; border-radius:14px; border:1.5px solid rgba(45,36,80,.18); background:var(--crema); font:inherit; color:var(--tinta); line-height:1.2; padding:.4rem .6rem; }
+    .s-days button small { display:block; font-size:.72rem; color:var(--gris); text-transform:capitalize; }
+    .s-days button b { font-size:1.15rem; }
+    .s-days button[aria-pressed="true"] { background:var(--lila); border-color:var(--lila); color:#fff; }
+    .s-days button[aria-pressed="true"] small { color:rgba(255,255,255,.8); }
+    .s-slots { display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:.5rem; }
+    .s-slots button { min-height:44px; border-radius:12px; border:1.5px solid var(--menta-2); background:var(--menta); font:inherit; font-size:.92rem; font-weight:600; color:var(--tinta); }
+    .s-slots button:disabled { background:#f1eef4; border-color:#f1eef4; color:#8f88a0; text-decoration:line-through; cursor:not-allowed; }
+    .s-slots button[aria-pressed="true"] { background:var(--lila); border-color:var(--lila); color:#fff; }
+    .s-days button:focus-visible, .s-slots button:focus-visible { outline:3px solid var(--menta-2); outline-offset:2px; }
+    .s-legend { display:flex; flex-wrap:wrap; gap:.4rem 1.2rem; margin:.8rem 0 0; font-size:.85rem; color:var(--gris); }
+    .s-legend span { display:flex; align-items:center; gap:.4rem; }
+    .s-legend i { width:14px; height:14px; border-radius:4px; display:inline-block; }
+    .l-free { background:var(--menta); border:1.5px solid var(--menta-2); } .l-busy { background:#e6e1ec; } .l-pick { background:var(--lila); }
+    .s-out { grid-column:1/-1; background:var(--menta); border-radius:16px; padding:1rem 1.2rem; font-size:.95rem; margin:0; }
+    .s-out[hidden] { display:none; }
+    .s-out b { display:block; margin-bottom:.3rem; color:var(--lila-2); }
+
+    /* Botón flotante y pie */
+    .s-wa { position:fixed; right:18px; bottom:18px; z-index:30; width:58px; height:58px; border-radius:50%; background:#25d366; display:grid; place-items:center; box-shadow:0 12px 26px -8px rgba(0,0,0,.35); transition:transform .25s; }
+    .s-wa:hover { transform:scale(1.06); }
+    .s-wa svg { width:30px; height:30px; fill:#fff; }
+    .s-foot { background:var(--tinta); color:rgba(255,255,255,.75); padding:2.4rem 0; font-size:.92rem; }
+    .s-foot .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:center; }
+    .s-foot a { color:#fff; }
+
+    /* Portada de cine */
+    .s-hero--cine { position:relative; padding:0; min-height:calc(100svh - 76px); display:grid; align-items:end; color:#fff; overflow:hidden; background:#2d2450; }
+    .s-hero__bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 40%; }
+    .s-hero--cine::before { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(35,26,66,.88) 0%,rgba(35,26,66,.55) 50%,rgba(35,26,66,.12) 100%), linear-gradient(0deg,rgba(35,26,66,.6),transparent 45%); }
+    .s-hero--cine .wrap { position:relative; z-index:2; display:grid; grid-template-columns:1.25fr .75fr; gap:2rem; align-items:end; padding:clamp(3rem,9vh,6rem) 0 clamp(4rem,11vh,7rem); }
+    .s-hero--cine h1 { color:#fff; font-size:clamp(3.2rem,1.4rem + 6.4vw,7rem); line-height:.98; }
+    .s-hero--cine h1 em { color:#d8ccf7; }
+    .s-hero--cine .s-eye { color:var(--menta-2); }
+    .s-hero--cine .s-lead { color:rgba(255,255,255,.86); }
+    .s-hero--cine .s-trust { color:rgba(255,255,255,.8); }
+    .s-hero--cine .s-btn--line { color:#fff; border-color:rgba(255,255,255,.55); }
+    .s-hero--cine .s-btn--line:hover { background:#fff; color:var(--tinta); }
+    .s-hero--cine .s-float { position:relative; left:auto; bottom:auto; justify-self:end; align-self:center; color:var(--tinta); }
+    .s-down { position:absolute; z-index:2; left:50%; bottom:1.4rem; width:30px; height:48px; margin-left:-15px; border:2px solid rgba(255,255,255,.6); border-radius:20px; }
+    .s-down span { position:absolute; left:50%; top:9px; width:4px; height:9px; margin-left:-2px; border-radius:2px; background:#fff; animation:baja 1.8s ease-in-out infinite; }
+    @keyframes baja { 60% { transform:translateY(14px); opacity:0; } 61% { transform:none; opacity:0; } }
+    .fx .s-hero__bg { animation:acerca 2.4s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes acerca { from { transform:scale(1.12); filter:blur(6px); } to { transform:none; filter:none; } }
+
+    /* Recomendador */
+    .q { position:relative; background:#fff; border-radius:28px; padding:clamp(1.4rem,4vw,2.8rem); box-shadow:0 30px 60px -40px rgba(45,36,80,.5); max-width:880px; overflow:hidden; }
+    .q__bar { height:6px; border-radius:6px; background:var(--menta); margin-bottom:1.6rem; overflow:hidden; }
+    .q__bar span { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--lila),#9a85de); border-radius:6px; transition:width .5s cubic-bezier(.2,.7,.2,1); }
+    .q__step { display:none; }
+    .q__step.is-on { display:block; animation:aparece .5s cubic-bezier(.2,.7,.2,1); }
+    @keyframes aparece { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:none; } }
+    .q__n { margin:0 0 .3rem; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--lila); }
+    .q__t { font-family:var(--serif); font-weight:500; font-size:clamp(1.6rem,1.2rem + 1.6vw,2.3rem); margin:0 0 1.3rem; }
+    .q__ops { display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem; }
+    .q__ops button { text-align:left; display:grid; gap:.2rem; min-height:76px; padding:1rem 1.2rem; border-radius:18px; border:1.5px solid rgba(45,36,80,.14); background:var(--crema); font:inherit; color:var(--tinta); transition:transform .25s, border-color .25s, background .25s, box-shadow .25s; }
+    .q__ops button b { font-size:1.05rem; }
+    .q__ops button span { font-size:.88rem; color:var(--gris); }
+    .q__ops button:hover, .q__ops button:focus-visible { border-color:var(--lila); background:#fff; transform:translateY(-3px); box-shadow:0 14px 26px -18px rgba(108,84,180,.7); outline:none; }
+    .q__res { text-align:left; }
+    .q__por { color:var(--gris); font-size:1.05rem; max-width:40em; margin:0 0 .8rem; }
+    .q__precio { font-family:var(--serif); font-size:2.2rem; color:var(--lila-2); margin:0 0 .6rem; }
+    .q__regalo { display:inline-block; background:var(--menta); color:var(--lila-2); font-weight:600; border-radius:999px; padding:.45rem 1rem; margin:0 0 1rem; font-size:.92rem; }
+    .q__regalo[hidden] { display:none; }
+    .q__acc { display:flex; flex-wrap:wrap; gap:.8rem; }
+
+    /* Antes y después */
+    .ba { position:relative; }
+    .ba img { pointer-events:none; user-select:none; }
+    .s-card .ba img { transform:none !important; animation:none !important; }
+    .ba__antes { position:absolute; inset:0; clip-path:inset(0 calc(100% - var(--x)) 0 0); }
+    .ba__linea { position:absolute; top:0; bottom:0; left:var(--x); width:2px; margin-left:-1px; background:#fff; box-shadow:0 0 0 1px rgba(45,36,80,.15); pointer-events:none; }
+    .ba__linea i { position:absolute; top:50%; left:50%; width:40px; height:40px; margin:-20px 0 0 -20px; border-radius:50%; background:#fff; box-shadow:0 6px 16px rgba(45,36,80,.35); }
+    .ba__linea i::before, .ba__linea i::after { content:""; position:absolute; top:50%; margin-top:-5px; border:5px solid transparent; }
+    .ba__linea i::before { left:7px; border-right-color:var(--lila); }
+    .ba__linea i::after { right:7px; border-left-color:var(--lila); }
+    .ba__tag { position:absolute; top:.7rem; padding:.2rem .65rem; border-radius:999px; background:rgba(45,36,80,.72); color:#fff; font-size:.75rem; font-weight:600; pointer-events:none; }
+    .ba__tag--a { left:.7rem; } .ba__tag--d { right:.7rem; }
+    .ba__rango { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; }
+    .ba__rango:focus-visible + * , .ba:focus-within .ba__linea i { outline:3px solid var(--menta-2); }
+    .ba__hint { color:var(--lila); font-weight:600; }
+
+    /* Asistente */
+    .ai-btn { position:fixed; right:18px; bottom:88px; z-index:31; display:flex; align-items:center; gap:.5rem; min-height:48px; padding:.5rem 1.1rem .5rem .8rem; border:0; border-radius:999px; background:linear-gradient(135deg,var(--lila),#9a85de); color:#fff; font:inherit; font-weight:600; box-shadow:0 14px 30px -10px rgba(79,58,146,.7); transition:transform .25s; }
+    .ai-btn:hover { transform:translateY(-2px); }
+    .ai-btn svg { width:22px; height:22px; fill:#fff; animation:brilla 2.4s ease-in-out infinite; }
+    @keyframes brilla { 50% { transform:scale(1.18) rotate(15deg); } }
+    .ai { position:fixed; right:18px; bottom:88px; z-index:40; width:min(380px,calc(100vw - 24px)); height:min(560px,calc(100svh - 120px)); display:flex; flex-direction:column; background:#fff; border-radius:24px; box-shadow:0 30px 70px -20px rgba(45,36,80,.55); overflow:hidden; animation:abre .35s cubic-bezier(.2,.7,.2,1); }
+    .ai[hidden] { display:none; }
+    @keyframes abre { from { opacity:0; transform:translateY(16px) scale(.97); } to { opacity:1; transform:none; } }
+    .ai__head { display:flex; align-items:center; gap:.7rem; padding:.9rem 1rem; background:linear-gradient(135deg,var(--lila),#9a85de); color:#fff; }
+    .ai__head small { display:block; font-size:.78rem; opacity:.85; }
+    .ai__av { width:38px; height:38px; border-radius:50%; background:#fff; color:var(--lila); display:grid; place-items:center; font-family:var(--serif); font-style:italic; font-size:1.3rem; flex:none; }
+    .ai__x { margin-left:auto; width:40px; height:40px; border:0; border-radius:50%; background:rgba(255,255,255,.18); color:#fff; font-size:1rem; }
+    .ai__log { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:.6rem; background:var(--crema); }
+    .ai__m { max-width:85%; padding:.6rem .9rem; border-radius:16px; font-size:.95rem; line-height:1.45; white-space:pre-line; }
+    .ai__m--bot { align-self:flex-start; background:#fff; border-bottom-left-radius:4px; box-shadow:0 4px 10px -8px rgba(45,36,80,.4); }
+    .ai__m--yo { align-self:flex-end; background:var(--lila); color:#fff; border-bottom-right-radius:4px; }
+    .ai__m a { display:inline-block; margin-top:.5rem; font-weight:600; color:var(--lila); }
+    .ai__dots { display:flex; gap:4px; } .ai__dots i { width:7px; height:7px; border-radius:50%; background:#b9add9; animation:punto 1s infinite; } .ai__dots i:nth-child(2) { animation-delay:.15s; } .ai__dots i:nth-child(3) { animation-delay:.3s; }
+    @keyframes punto { 50% { transform:translateY(-4px); opacity:.5; } }
+    .ai__chips { display:flex; gap:.4rem; overflow-x:auto; padding:.6rem 1rem 0; }
+    .ai__chips button { flex:none; min-height:36px; border:1.5px solid var(--menta-2); background:var(--menta); color:var(--lila-2); border-radius:999px; padding:.3rem .8rem; font:inherit; font-size:.85rem; font-weight:600; }
+    .ai__form { display:flex; gap:.5rem; padding:.7rem 1rem 1rem; }
+    .ai__form input { flex:1; min-height:46px; border-radius:999px; border:1.5px solid rgba(45,36,80,.18); padding:0 1rem; font:inherit; background:var(--crema); }
+    .ai__form input:focus { outline:3px solid var(--menta-2); border-color:var(--lila); }
+    .ai__form button { width:46px; height:46px; border-radius:50%; border:0; background:var(--lila); display:grid; place-items:center; }
+    .ai__form button svg { width:20px; height:20px; fill:#fff; }
+
+    @media (max-width: 900px) {
+      .s-hero--cine .wrap { grid-template-columns:1fr; }
+      .s-hero--cine .s-float { justify-self:start; }
+      .s-down { display:none; }
+      .q__ops { grid-template-columns:1fr; }
+      .ai-btn span { display:none; }
+      .ai-btn { padding:0; width:58px; justify-content:center; }
+      .s-nav { display:none; }
+      .s-head .s-btn { margin-left:auto; }
+      .s-hero .wrap, .s-book .wrap { grid-template-columns:1fr; }
+      .s-photo { max-width:440px; margin:0 auto; }
+      .s-float { left:.6rem; bottom:1rem; }
+      .s-services, .s-steps, .s-packs { grid-template-columns:1fr; }
+      .s-gal { grid-template-columns:1fr 1fr; grid-template-rows:none; }
+      .s-gal img { aspect-ratio:1; height:auto; }
+      .s-gal img:first-child { grid-column:1/-1; grid-row:auto; aspect-ratio:4/3; }
+    }
+    @media (min-width: 901px) and (max-width: 1100px) { .s-nav { gap:1rem; } .s-nav a { font-size:.88rem; } }
+    @media (max-width: 520px) {
+      .s-logo small { display:none; }
+      .s-form { grid-template-columns:1fr; }
+      .s-cta .s-btn { width:100%; }
+    }
+    /* Movimiento: entradas al bajar (solo si el JS lo activa), respiración lenta de fotos y tarjeta flotante */
+    .fx [data-r] { opacity:0; transform:translateY(34px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0s); }
+    .fx [data-r].in { opacity:1; transform:none; }
+    .fx .s-hero h1 .w { display:inline-block; opacity:0; transform:translateY(.5em); animation:sube .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--d,0s); }
+    @keyframes sube { to { opacity:1; transform:none; } }
+    .fx .s-photo > .s-vid { animation:entra 1.4s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes entra { from { opacity:0; transform:scale(.94); clip-path:inset(12% 0 0 0 round 240px 240px 28px 28px); } to { opacity:1; transform:none; clip-path:inset(0 round 240px 240px 28px 28px); } }
+    .s-float { animation:flota 6s ease-in-out infinite; }
+    @keyframes flota { 50% { transform:translateY(-10px); } }
+    .s-card img.respira { animation:respira 14s ease-in-out infinite alternate; }
+    @keyframes respira { to { transform:scale(1.08) translate(-1.5%, -1%); } }
+    .s-card:hover img.respira { animation-play-state:paused; }
+    .s-band { background-attachment:scroll; }
+    .s-band p .w { display:inline-block; }
+    @media (prefers-reduced-motion: reduce) {
+      .spa *, .spa *::before { transition:none !important; animation:none !important; }
+      .fx [data-r] { opacity:1; transform:none; }
+    }
+    .ex-qr h3 { color:var(--lila-2); }
+  </style>
+</head>
+<body class="spa">
+  <div class="ribbon"><div class="wrap"><span>Ejemplo 1 · Esencia en paquete <b>Ultra Plus</b> (desde USD 770) · Así se vería una web hecha por Benemeo Studio</span><span><a data-back href="../index.html#ejemplos">&larr; Volver</a> &nbsp;·&nbsp; <a href="../index.html?paquete=Ultra%20Plus#propuesta">Quiero este paquete</a></span></div></div>
+  <script data-volver>/* Volver: si vienes de la portada, regresa al instante y al mismo lugar */document.querySelectorAll('.ribbon a[data-back]').forEach(function(a){a.addEventListener('click',function(e){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){e.preventDefault();history.back();}}catch(x){}});});</script>
+
+  <header class="s-head"><div class="wrap">
+    <a class="s-logo" href="#inicio"><img src="../assets/ejemplo-spa/logo-esencia.svg" width="50" height="50" alt=""><span><b>Esencia</b><small>Estética &amp; Spa</small></span></a>
+    <nav class="s-nav" aria-label="Secciones">
+      <a href="#recomendador">¿Qué me conviene?</a><a href="#servicios">Servicios y precios</a><a href="#paquetes">Paquetes</a><a href="#galeria">Galería</a><a href="#preguntas">Preguntas</a><a href="#reserva">Horario</a>
+    </nav>
+    <a class="s-btn" href="#reserva">Reservar</a>
+  </div></header>
+
+  <main id="inicio">
+    <section class="s-hero s-hero--cine">
+      <video class="s-vid s-hero__bg" src="../assets/ejemplo-spa/video-masaje-ancho.mp4" poster="../assets/ejemplo-spa/video-masaje-ancho-poster.jpg" width="1280" height="672" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+      <div class="wrap">
+        <div class="s-hero__txt">
+          <p class="s-eye">Masajes · Faciales · Cejas · Pestañas · Maquillaje</p>
+          <h1 class="s-h">Un momento <em>para ti</em></h1>
+          <p class="s-lead">Relájate, cuida tu piel y sal lista para cualquier ocasión. Todo en un mismo lugar, para mujeres y hombres.</p>
+          <div class="s-cta">
+            <a class="s-btn" href="#reserva">Reservar mi cita</a>
+            <a class="s-btn s-btn--line" href="#recomendador">¿Qué me conviene?</a>
+          </div>
+          <ul class="s-trust">
+            <li>10 años de experiencia</li>
+            <li>Pagas el día de tu cita</li>
+            <li>Reserva por WhatsApp</li>
+          </ul>
+        </div>
+        <div class="s-float"><img src="../assets/ejemplo-spa/regalo-cejas.jpg" width="320" height="320" alt="Depilación de cejas con cera de regalo"><p><b>Regalo de bienvenida</b><span>En tu primera cita, la depilación de cejas con cera va por nuestra cuenta.</span></p></div>
+      </div>
+      <a class="s-down" href="#recomendador" aria-label="Bajar al recomendador"><span></span></a>
+    </section>
+
+    <section class="s-sec s-sec--menta" id="recomendador"><div class="wrap">
+      <div class="s-top" data-r>
+        <div><p class="s-eye">Recomendador</p><h2 class="s-h">¿Qué necesita tu piel <em>hoy</em>?</h2></div>
+        <p class="s-lead">Responde 3 preguntas y te decimos qué te conviene.</p>
+      </div>
+      <div class="q" data-r>
+        <div class="q__bar" aria-hidden="true"><span></span></div>
+        <div class="q__step is-on" data-paso="1">
+          <p class="q__n">Pregunta 1 de 3</p>
+          <h3 class="q__t">¿Qué quieres hoy?</h3>
+          <div class="q__ops">
+            <button type="button" data-k="meta" data-v="relax"><b>Relajarme</b><span>Soltar la tensión del cuerpo</span></button>
+            <button type="button" data-k="meta" data-v="piel"><b>Cuidar mi piel</b><span>Limpia, fresca y luminosa</span></button>
+            <button type="button" data-k="meta" data-v="mirada"><b>Resaltar mi mirada</b><span>Cejas y pestañas definidas</span></button>
+            <button type="button" data-k="meta" data-v="evento"><b>Verme lista para un evento</b><span>Fotos, fiestas, bodas</span></button>
+          </div>
+        </div>
+        <div class="q__step" data-paso="2">
+          <p class="q__n">Pregunta 2 de 3</p>
+          <h3 class="q__t">¿Cuánto tiempo tienes?</h3>
+          <div class="q__ops q__ops--2">
+            <button type="button" data-k="tiempo" data-v="corto"><b>Una hora</b><span>Algo rápido y efectivo</span></button>
+            <button type="button" data-k="tiempo" data-v="largo"><b>Puedo quedarme más</b><span>Quiero consentirme</span></button>
+          </div>
+        </div>
+        <div class="q__step" data-paso="3">
+          <p class="q__n">Pregunta 3 de 3</p>
+          <h3 class="q__t">¿Es tu primera visita?</h3>
+          <div class="q__ops q__ops--2">
+            <button type="button" data-k="nueva" data-v="si"><b>Sí, es mi primera vez</b><span>Quiero conocerlas</span></button>
+            <button type="button" data-k="nueva" data-v="no"><b>Ya he venido</b><span>Vuelvo por más</span></button>
+          </div>
+        </div>
+        <div class="q__step q__res" data-paso="4" aria-live="polite">
+          <p class="q__n">Tu recomendación</p>
+          <h3 class="q__t" id="q-titulo"></h3>
+          <p class="q__por" id="q-por"></p>
+          <p class="q__precio" id="q-precio"></p>
+          <p class="q__regalo" id="q-regalo" hidden>Incluye tu regalo de bienvenida: depilación de cejas con cera.</p>
+          <div class="q__acc">
+            <a class="s-btn" href="#reserva" id="q-reservar">Reservar esto</a>
+            <button type="button" class="s-btn s-btn--line" id="q-otra">Empezar de nuevo</button>
+          </div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="s-sec" id="servicios"><div class="wrap">
+      <div class="s-top" data-r>
+        <div><p class="s-eye">Servicios y precios</p><h2 class="s-h">Cuidado para tu cuerpo, <em>tu piel y tu mirada</em></h2></div>
+        <p class="s-lead">Precios claros, sin sorpresas. Toca "Reservar" y eliges el día.</p>
+      </div>
+      <div class="s-services">
+        <article class="s-card" data-r>
+          <div class="s-media"><img src="../assets/ejemplo-spa/masaje-piedras.jpg" width="900" height="1114" alt="Masaje con piedras calientes en la espalda" loading="lazy" class="respira"></div>
+          <div>
+            <h3>Masajes</h3>
+            <p>Para soltar la tensión acumulada y descansar de verdad.</p>
+            <ul class="s-prices">
+              <li><span>Relajante</span><small>60 min</small><b>$55</b></li>
+              <li><span>Descontracturante</span><small>60 min</small><b>$65</b></li>
+              <li><span>Piedras calientes</span><small>90 min</small><b>$100</b></li>
+            </ul>
+            <a href="#reserva" data-servicio="Masaje">Reservar →</a>
+          </div>
+        </article>
+        <article class="s-card" data-r>
+          <div class="s-media"><img src="../assets/ejemplo-spa/limpieza-facial.jpg" width="900" height="1350" alt="Esteticista realizando una limpieza facial" loading="lazy" class="respira"></div>
+          <div>
+            <h3>Limpieza facial</h3>
+            <p>Piel limpia, fresca y luminosa, según lo que tu piel necesite.</p>
+            <ul class="s-prices">
+              <li><span>Limpieza facial</span><small>60 a 90 min</small><b>desde $55</b></li>
+            </ul>
+            <a href="#reserva" data-servicio="Limpieza facial">Reservar →</a>
+          </div>
+        </article>
+        <article class="s-card" data-r>
+          <div class="s-media"><img src="../assets/ejemplo-spa/cejas-cera.jpg" width="960" height="720" alt="Esteticista aplicando cera sobre la ceja con una espátula" loading="lazy"></div>
+          <div>
+            <h3>Depilación de cejas</h3>
+            <p>Cejas definidas y en armonía con la forma de tu rostro.</p>
+            <ul class="s-prices">
+              <li><span>Depilación de cejas</span><small>20 min</small><b>$25</b></li>
+            </ul>
+            <a href="#reserva" data-servicio="Depilación de cejas">Reservar →</a>
+          </div>
+        </article>
+        <article class="s-card" data-r>
+          <div class="s-media ba" style="--x:50%">
+            <img src="../assets/ejemplo-spa/micro-despues.jpg" width="900" height="600" alt="Después: cejas definidas con micropigmentación" loading="lazy">
+            <img class="ba__antes" src="../assets/ejemplo-spa/micro-antes.jpg" width="900" height="600" alt="Antes: cejas ralas" loading="lazy">
+            <span class="ba__tag ba__tag--a">Antes</span><span class="ba__tag ba__tag--d">Después</span>
+            <span class="ba__linea" aria-hidden="true"><i></i></span>
+            <input class="ba__rango" type="range" min="0" max="100" value="50" aria-label="Desliza para comparar antes y después">
+          </div>
+          <div>
+            <h3>Micropigmentación</h3>
+            <p>Cejas llenas y definidas que duran meses. <strong class="ba__hint">Desliza la foto para ver el antes y después.</strong></p>
+            <ul class="s-prices">
+              <li><span>Micropigmentación de cejas</span><small>2 h</small><b>$155</b></li>
+            </ul>
+            <a href="#reserva" data-servicio="Micropigmentación">Reservar →</a>
+          </div>
+        </article>
+        <article class="s-card" data-r>
+          <div class="s-media"><img src="../assets/ejemplo-spa/pestanas.jpg" width="900" height="600" alt="Tratamiento de lifting de pestañas" loading="lazy"></div>
+          <div>
+            <h3>Pestañas</h3>
+            <p>Una mirada más abierta, con o sin extensiones.</p>
+            <ul class="s-prices">
+              <li><span>Lifting de pestañas</span><small>60 min</small><b>$40</b></li>
+              <li><span>Extensiones de pestañas</span><small>2 h</small><b>$55</b></li>
+            </ul>
+            <a href="#reserva" data-servicio="Pestañas">Reservar →</a>
+          </div>
+        </article>
+        <article class="s-card" data-r>
+          <div class="s-media"><img src="../assets/ejemplo-spa/maquillaje.jpg" width="900" height="1350" alt="Maquilladora preparando a una clienta" loading="lazy" class="respira"></div>
+          <div>
+            <h3>Maquillaje social</h3>
+            <p>Para eventos, fotos, graduaciones y bodas.</p>
+            <ul class="s-prices">
+              <li><span>Maquillaje social</span><small>60 min</small><b>$90</b></li>
+            </ul>
+            <a href="#reserva" data-servicio="Maquillaje social">Reservar →</a>
+          </div>
+        </article>
+      </div>
+      <p class="s-note">Precios en dólares. Pagas el día de tu cita, al terminar el servicio.</p>
+    </div></section>
+
+    <section class="s-sec s-sec--menta" id="paquetes"><div class="wrap">
+      <div class="s-top" data-r>
+        <div><p class="s-eye">Paquetes</p><h2 class="s-h">Combina y <em>ahorra</em></h2></div>
+        <p class="s-lead">Servicios que van bien juntos, en una sola cita.</p>
+      </div>
+      <div class="s-packs">
+        <article data-r class="s-pack">
+          <h3>Relax total</h3>
+          <ul><li>Masaje relajante (60 min)</li><li>Limpieza facial (60 min)</li></ul>
+          <p class="s-price">$100<small>$110</small></p>
+          <a class="s-btn s-btn--line" href="#reserva" data-servicio="Paquete Relax total">Reservar paquete</a>
+        </article>
+        <article data-r class="s-pack s-pack--star">
+          <h3>Mirada perfecta</h3>
+          <ul><li>Lifting de pestañas</li><li>Depilación de cejas</li></ul>
+          <p class="s-price">$58<small>$65</small></p>
+          <a class="s-btn" href="#reserva" data-servicio="Paquete Mirada perfecta">Reservar paquete</a>
+        </article>
+        <article data-r class="s-pack">
+          <h3>Día especial</h3>
+          <ul><li>Maquillaje social</li><li>Lifting de pestañas</li><li>Depilación de cejas</li></ul>
+          <p class="s-price">$135<small>$155</small></p>
+          <a class="s-btn s-btn--line" href="#reserva" data-servicio="Paquete Día especial">Reservar paquete</a>
+        </article>
+      </div>
+    </div></section>
+
+    <section class="s-sec" id="como"><div class="wrap">
+      <div class="s-top" data-r><div><p class="s-eye">Cómo reservar</p><h2 class="s-h">Así de <em>sencillo</em></h2></div></div>
+      <ol class="s-steps" data-r>
+        <li><h3>Elige tu servicio</h3><p>Mira los servicios y precios, o un paquete.</p></li>
+        <li><h3>Elige día y hora</h3><p>En la agenda ves las horas libres. Eliges la tuya y tu mensaje llega listo a WhatsApp.</p></li>
+        <li><h3>Paga en tu cita</h3><p>No cobramos por adelantado: pagas al terminar, en efectivo, transferencia o tarjeta.</p></li>
+      </ol>
+    </div></section>
+
+    <section class="s-band" aria-label="Frase"><div class="wrap">
+      <p data-r>Tu bienestar empieza con una pausa.</p>
+    </div></section>
+
+    <section class="s-sec" id="galeria"><div class="wrap">
+      <div class="s-top" data-r>
+        <div><p class="s-eye">Galería</p><h2 class="s-h">Un espacio para <em>desconectar</em></h2></div>
+      </div>
+      <div class="s-gal" data-r>
+        <img src="../assets/ejemplo-spa/facial-rodillo.jpg" width="900" height="601" alt="Masaje facial con rodillo de jade" loading="lazy">
+        <img src="../assets/ejemplo-spa/productos.jpg" width="900" height="1120" alt="Productos naturales para el cuidado de la piel" loading="lazy">
+        <img src="../assets/ejemplo-spa/toallas-rosas.jpg" width="900" height="1200" alt="Toallas, vela y rosas" loading="lazy">
+        <img src="../assets/ejemplo-spa/velas.jpg" width="900" height="600" alt="Velas encendidas y toallas en la sala de masajes" loading="lazy">
+        <img src="../assets/ejemplo-spa/mascarilla.jpg" width="900" height="1350" alt="Aplicación de mascarilla facial con pincel" loading="lazy">
+      </div>
+    </div></section>
+
+    <section class="s-sec s-sec--menta" id="preguntas"><div class="wrap">
+      <div class="s-top" data-r><div><p class="s-eye">Preguntas</p><h2 class="s-h">Antes de <em>reservar</em></h2></div></div>
+      <div class="s-faq" data-r>
+        <details><summary>¿Tengo que pagar para reservar?</summary><p>No. Reservas por WhatsApp y pagas el día de tu cita, al terminar el servicio.</p></details>
+        <details><summary>¿Cómo puedo pagar?</summary><p>En efectivo, por transferencia o con tarjeta.</p></details>
+        <details><summary>¿Atienden a hombres?</summary><p>Sí. Masajes, faciales y depilación de cejas son para mujeres y hombres.</p></details>
+        <details><summary>¿Cuánto dura el lifting de pestañas?</summary><p>Entre 6 y 8 semanas, según el crecimiento natural de tus pestañas.</p></details>
+        <details><summary>¿La micropigmentación duele?</summary><p>Se aplica anestesia tópica, así que la mayoría solo siente una molestia leve.</p></details>
+        <details><summary>¿Puedo cambiar o cancelar mi cita?</summary><p>Sí. Avísanos por WhatsApp con al menos 24 horas para darle tu espacio a otra persona.</p></details>
+      </div>
+    </div></section>
+
+    <section class="s-sec s-book" id="reserva"><div class="wrap bk">
+      <div class="bk__head">
+        <p class="s-eye">Reserva</p>
+        <h2 class="s-h">Reserva tu <em>cita</em></h2>
+      </div>
+      <div class="bk__main">
+        <p class="s-lead">Mira las horas libres, elige la tuya y tu mensaje llega listo a WhatsApp.</p>
+        <form class="s-form" data-r novalidate>
+        <label>Tu nombre<input name="nombre" autocomplete="given-name" required></label>
+        <label>Servicio<select name="servicio">
+          <option>Masaje</option><option>Limpieza facial</option><option>Depilación de cejas</option><option>Micropigmentación</option><option>Pestañas</option><option>Maquillaje social</option>
+          <option>Paquete Relax total</option><option>Paquete Mirada perfecta</option><option>Paquete Día especial</option>
+        </select></label>
+        <fieldset class="full s-agenda">
+          <legend>Elige día y hora</legend>
+          <div class="s-days" role="group" aria-label="Día"></div>
+          <div class="s-slots" role="group" aria-label="Hora"></div>
+          <p class="s-legend"><span><i class="l-free"></i>Libre</span><span><i class="l-busy"></i>Ocupado</span><span><i class="l-pick"></i>Tu hora</span></p>
+        </fieldset>
+        <p class="s-pay">Pagas el día de tu cita: efectivo, transferencia o tarjeta.</p>
+        <div class="full"><button class="s-btn" type="submit">Enviar por WhatsApp</button></div>
+        <p class="s-out" role="status" hidden></p>
+      </form>
+      </div>
+      <section class="ex-qr" aria-label="Código QR de WhatsApp">
+          <img src="../assets/qr-ejemplo.svg" width="200" height="200" alt="Código QR para escribir por WhatsApp">
+          <h3>Escanea y escríbenos por WhatsApp</h3>
+        </section>
+      <div class="s-info" data-r>
+          <section aria-labelledby="h-horario">
+            <h3 id="h-horario">Horario</h3>
+            <table class="s-hours"><tbody>
+              <tr><td>Lunes a viernes</td><td>9:00 a. m. a 6:00 p. m.</td></tr>
+              <tr><td>Sábado</td><td>9:00 a. m. a 2:00 p. m.</td></tr>
+              <tr><td>Domingo</td><td>Cerrado</td></tr>
+            </tbody></table>
+          </section>
+          <section aria-labelledby="h-donde">
+            <h3 id="h-donde">Dónde estamos</h3>
+            <p>Plaza Mayor, San José, local 12. Estacionamiento gratis.</p>
+          </section>
+        </div>
+    </div></section>
+  </main>
+
+  <button class="ai-btn" type="button" aria-expanded="false" aria-controls="ai"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z"/></svg><span>Pregúntale a Esencia</span></button>
+  <section class="ai" id="ai" hidden aria-label="Asistente de Esencia">
+    <header class="ai__head"><span class="ai__av" aria-hidden="true">E</span><span><b>Asistente de Esencia</b><small>Responde al instante · demostración</small></span><button type="button" class="ai__x" aria-label="Cerrar asistente">✕</button></header>
+    <div class="ai__log" role="log" aria-live="polite"></div>
+    <div class="ai__chips"></div>
+    <form class="ai__form"><input name="q" autocomplete="off" placeholder="Escribe tu pregunta…" aria-label="Tu pregunta"><button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button></form>
+  </section>
+
+  <a class="s-wa" href="#reserva" aria-label="Reservar por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg></a>
+
+  <footer class="s-foot"><div class="wrap">
+    <span>Esencia Estética &amp; Spa · Masajes, faciales, cejas, pestañas y maquillaje</span>
+    <span>Ejemplo hecho por <a href="../index.html">Benemeo Studio</a></span>
+  </div></footer>
+
+  <script>
+  (function () {
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var vids = [].slice.call(document.querySelectorAll('.s-vid'));
+    if (reduce) { vids.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); }); return; }
+    var root = document.documentElement; root.classList.add('fx');
+    // Título de la portada: palabra por palabra
+    var h1 = document.querySelector('.s-hero h1');
+    var i = 0;
+    [].slice.call(h1.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function (t) {
+          if (!t.trim()) { frag.appendChild(document.createTextNode(t)); return; }
+          var w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--d', (0.15 + i++ * 0.12) + 's'); w.textContent = t; frag.appendChild(w);
+        });
+        h1.replaceChild(frag, n);
+      } else { n.classList.add('w'); n.style.setProperty('--d', (0.15 + i++ * 0.12) + 's'); }
+    });
+    // Entradas al bajar, con un pequeño escalón entre tarjetas vecinas
+    var items = [].slice.call(document.querySelectorAll('[data-r]'));
+    items.forEach(function (el) {
+      var sib = el.parentElement.querySelectorAll(':scope > [data-r]');
+      if (sib.length > 1) el.style.setProperty('--d', ([].indexOf.call(sib, el) % 3) * 0.12 + 's');
+    });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+    // Videos: solo se mueven cuando se ven
+    var vo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); } else e.target.pause(); });
+    });
+    vids.forEach(function (v) { vo.observe(v); });
+    // Franja de lavanda: el fondo se desplaza más lento que la página
+    var band = document.querySelector('.s-band'), tick = false;
+    function par() { tick = false; var r = band.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight) band.style.backgroundPosition = 'center ' + (50 + (r.top / innerHeight - .5) * -30) + '%'; }
+    addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(par); } }, { passive: true }); par();
+  })();
+  // Recomendador
+  (function () {
+    var q = document.querySelector('.q'), r = {}, bar = q.querySelector('.q__bar span');
+    var REC = {
+      'relax-corto': ['Masaje relajante', 'Una hora para soltar la tensión acumulada y descansar de verdad.', '$55 · 60 min', 'Masaje'],
+      'relax-largo': ['Paquete Relax total', 'Masaje relajante y limpieza facial en una sola cita: cuerpo y piel renovados.', '$100 · antes $110', 'Paquete Relax total'],
+      'piel-corto': ['Limpieza facial', 'Piel limpia, fresca y luminosa, adaptada a tu tipo de piel.', 'desde $55 · 60 min', 'Limpieza facial'],
+      'piel-largo': ['Limpieza facial profunda', 'La versión de 90 minutos, con más tiempo para tu piel.', 'desde $55 · 90 min', 'Limpieza facial'],
+      'mirada-corto': ['Lifting de pestañas', 'Pestañas curvas y más largas por semanas, sin extensiones.', '$40 · 60 min', 'Pestañas'],
+      'mirada-largo': ['Paquete Mirada perfecta', 'Lifting de pestañas y depilación de cejas: tu mirada, enmarcada.', '$58 · antes $65', 'Paquete Mirada perfecta'],
+      'evento-corto': ['Maquillaje social', 'Maquillaje profesional que dura toda la noche y se ve bien en fotos.', '$90 · 60 min', 'Maquillaje social'],
+      'evento-largo': ['Paquete Día especial', 'Maquillaje, lifting de pestañas y depilación de cejas para brillar.', '$135 · antes $155', 'Paquete Día especial']
+    };
+    function ir(n) {
+      q.querySelectorAll('.q__step').forEach(function (s) { s.classList.toggle('is-on', +s.dataset.paso === n); });
+      bar.style.width = ((n - 1) / 3 * 100) + '%';
+    }
+    q.querySelectorAll('.q__ops button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        r[b.dataset.k] = b.dataset.v;
+        var paso = +b.closest('.q__step').dataset.paso;
+        if (paso < 3) { ir(paso + 1); return; }
+        var x = REC[r.meta + '-' + r.tiempo];
+        document.getElementById('q-titulo').textContent = x[0];
+        document.getElementById('q-por').textContent = x[1];
+        document.getElementById('q-precio').textContent = x[2];
+        document.getElementById('q-regalo').hidden = r.nueva !== 'si';
+        document.getElementById('q-reservar').setAttribute('data-servicio', x[3]);
+        ir(4);
+      });
+    });
+    document.getElementById('q-otra').addEventListener('click', function () { r = {}; ir(1); });
+    document.getElementById('q-reservar').addEventListener('click', function () {
+      var f = document.querySelector('.s-form'); f.servicio.value = this.getAttribute('data-servicio');
+    });
+  })();
+  // Antes y después
+  document.querySelectorAll('.ba').forEach(function (ba) {
+    var r = ba.querySelector('.ba__rango');
+    r.addEventListener('input', function () { ba.style.setProperty('--x', r.value + '%'); });
+  });
+  // Asistente (demostración: respuestas escritas a partir de los datos de esta página)
+  (function () {
+    var btn = document.querySelector('.ai-btn'), box = document.getElementById('ai'), log = box.querySelector('.ai__log'),
+        chips = box.querySelector('.ai__chips'), form = box.querySelector('.ai__form'), started = false;
+    var R = [
+      [/lifting|pesta/, 'El lifting de pestañas cuesta $40 y dura unos 60 minutos. Las extensiones de pestañas cuestan $55 (unas 2 horas). El lifting dura entre 6 y 8 semanas.', 'Pestañas'],
+      [/micro/, 'La micropigmentación de cejas cuesta $155 y toma unas 2 horas. Se aplica anestesia tópica, así que solo se siente una molestia leve.', 'Micropigmentación'],
+      [/ceja|cera|depila/, 'La depilación de cejas con cera cuesta $25 (20 minutos). Y si es tu primera cita, ¡va por nuestra cuenta! 🎁', 'Depilación de cejas'],
+      [/masaj|piedra|relaj|contractura/, 'Masajes: relajante $55 (60 min), descontracturante $65 (60 min) y piedras calientes $100 (90 min).', 'Masaje'],
+      [/facial|limpieza|piel|cutis/, 'La limpieza facial va desde $55, entre 60 y 90 minutos según tu tipo de piel.', 'Limpieza facial'],
+      [/maquill|evento|boda|fiesta|graduaci/, 'El maquillaje social cuesta $90. Para un día especial te conviene el paquete Día especial: maquillaje, lifting y cejas por $135 (antes $155).', 'Maquillaje social'],
+      [/paquete|combo|promo|descuento|ahorr/, 'Tenemos 3 paquetes: Relax total $100, Mirada perfecta $58 y Día especial $135. Todos con ahorro frente a los precios separados.', 'Paquete Relax total'],
+      [/horario|hora|abren|abierto|s[aá]bado|domingo|cierran/, 'Atendemos de lunes a viernes de 9:00 a. m. a 6:00 p. m. y los sábados de 9:00 a. m. a 2:00 p. m. Los domingos estamos cerrados.'],
+      [/d[oó]nde|direcci|ubica|llegar|parque|estaciona/, 'Estamos en Plaza Mayor, San José, local 12. El estacionamiento es gratis.'],
+      [/pag|tarjeta|efectivo|transfer|adelant|sinpe/, 'No cobramos por adelantado: pagas el día de tu cita, al terminar, en efectivo, transferencia o tarjeta.'],
+      [/regalo|primera|gratis/, 'En tu primera cita te regalamos la depilación de cejas con cera. 🎁'],
+      [/hombre|caballero/, 'Sí, atendemos a mujeres y hombres: masajes, faciales y depilación de cejas.'],
+      [/cancel|cambiar|mover|reprogram/, 'Claro. Solo avísanos por WhatsApp con al menos 24 horas de anticipación.'],
+      [/reserv|cita|agend|turno/, 'Con gusto. Elige día y hora en la agenda y tu mensaje llega listo a WhatsApp.', '']
+    ];
+    var CHIPS = ['¿Cuánto cuesta el lifting?', '¿Abren los sábados?', '¿Dónde están?', '¿Cómo pago?', 'Quiero reservar'];
+    function msg(t, quien, serv) {
+      var m = document.createElement('div'); m.className = 'ai__m ai__m--' + quien; m.textContent = t;
+      if (serv !== undefined) {
+        var a = document.createElement('a'); a.href = '#reserva'; a.textContent = 'Reservar ahora →';
+        a.addEventListener('click', function () { if (serv) document.querySelector('.s-form').servicio.value = serv; cerrar(); });
+        m.appendChild(document.createElement('br')); m.appendChild(a);
+      }
+      log.appendChild(m); log.scrollTop = log.scrollHeight;
+    }
+    function responder(t) {
+      msg(t, 'yo');
+      var dots = document.createElement('div'); dots.className = 'ai__m ai__m--bot'; dots.innerHTML = '<span class="ai__dots"><i></i><i></i><i></i></span>';
+      log.appendChild(dots); log.scrollTop = log.scrollHeight;
+      var x = t.toLowerCase(), hit = R.filter(function (r) { return r[0].test(x); })[0];
+      setTimeout(function () {
+        dots.remove();
+        if (hit) msg(hit[1], 'bot', hit[2]);
+        else msg('Puedo ayudarte con precios, horario, ubicación, pagos y reservas. ¿Qué te gustaría saber?', 'bot');
+      }, 700 + Math.min(900, x.length * 18));
+    }
+    function abrir() {
+      box.hidden = false; btn.hidden = true; btn.setAttribute('aria-expanded', 'true');
+      if (!started) {
+        started = true;
+        msg('¡Hola! Soy el asistente de Esencia ✨ Pregúntame precios, horarios o cómo reservar.', 'bot');
+        CHIPS.forEach(function (c) { var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.addEventListener('click', function () { responder(c); }); chips.appendChild(b); });
+      }
+      form.q.focus();
+    }
+    function cerrar() { box.hidden = true; btn.hidden = false; btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+    btn.addEventListener('click', abrir);
+    box.querySelector('.ai__x').addEventListener('click', cerrar);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) cerrar(); });
+    form.addEventListener('submit', function (e) { e.preventDefault(); var t = form.q.value.trim(); if (t) { responder(t); form.q.value = ''; } });
+  })();
+  (function () {
+    var f = document.querySelector('.s-form'), out = f.querySelector('.s-out');
+    // "Reservar" en un servicio o paquete lo deja elegido en el formulario
+    document.querySelectorAll('[data-servicio]').forEach(function (a) {
+      a.addEventListener('click', function () { f.servicio.value = a.getAttribute('data-servicio'); });
+    });
+    // Agenda de ejemplo: los próximos 6 días hábiles; las horas ocupadas son de muestra
+    var days = f.querySelector('.s-days'), slots = f.querySelector('.s-slots'), pick = { dia: null, hora: null };
+    var HORAS = ['9:00 a. m.', '10:00 a. m.', '11:00 a. m.', '1:00 p. m.', '2:00 p. m.', '3:00 p. m.', '4:00 p. m.', '5:00 p. m.'];
+    var SAB = HORAS.slice(0, 5);
+    function busy(date, i) { return ((date.getDate() * 7 + i * 3) % 5) < 2; }
+    function showSlots(date) {
+      slots.innerHTML = ''; pick.hora = null;
+      (date.getDay() === 6 ? SAB : HORAS).forEach(function (h, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = h;
+        if (busy(date, i)) { b.disabled = true; b.setAttribute('aria-label', h + ', ocupado'); }
+        else b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () {
+          slots.querySelectorAll('[aria-pressed]').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true'); pick.hora = h;
+        });
+        slots.appendChild(b);
+      });
+    }
+    var d = new Date(), k = 0;
+    while (k < 6) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() === 0) continue;
+      (function (date, first) {
+        var b = document.createElement('button'); b.type = 'button';
+        b.innerHTML = '<small>' + date.toLocaleDateString('es', { weekday: 'short' }) + '</small><b>' + date.getDate() + '</b>';
+        b.setAttribute('aria-label', date.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long' }));
+        b.setAttribute('aria-pressed', first ? 'true' : 'false');
+        b.addEventListener('click', function () {
+          days.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true'); pick.dia = date; showSlots(date);
+        });
+        days.appendChild(b);
+        if (first) { pick.dia = date; showSlots(date); }
+      })(new Date(d), k === 0);
+      k++;
+    }
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var n = f.nombre.value.trim();
+      if (!n) { f.nombre.focus(); out.hidden = false; out.innerHTML = '<b>Falta tu nombre</b>Escríbelo para armar el mensaje.'; return; }
+      if (!pick.hora) { out.hidden = false; out.innerHTML = '<b>Falta la hora</b>Toca una hora libre en la agenda.'; return; }
+      var dia = pick.dia.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long' });
+      var msg = 'Hola, soy ' + n + '. Quiero reservar: ' + f.servicio.value + ', el ' + dia + ' a las ' + pick.hora + '.';
+      out.hidden = false;
+      out.innerHTML = '<b>Así llegaría a tu WhatsApp:</b>';
+      out.appendChild(document.createTextNode('«' + msg + '»'));
+      out.appendChild(document.createElement('br'));
+      out.appendChild(document.createTextNode('(Es un ejemplo: en una web real, este botón abre WhatsApp con el mensaje listo y las horas ocupadas salen de la agenda del negocio).'));
+    });
+  })();
+  </script>
+</body>
+</html>

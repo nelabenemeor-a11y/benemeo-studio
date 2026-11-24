@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dulce Encanto Pastelería · Ejemplo de Benemeo Studio</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Ejemplo de una web hecha por Benemeo Studio para una pastelería: arma tu queque en vivo, mesa de dulces, calculadora de invitados y calendario de entregas.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/ejemplos.css?v=20261116c">
+  <style>
+    /* Dulce Encanto: frambuesa, crema, chocolate y dorado */
+    .pas { --fr:#b4436c; --fr-2:#8f2f53; --rosa:#fbe9ee; --rosa-2:#f3c6d4; --crema:#fff8f2; --choc:#3b2420; --tinta:#3a2329; --gris:#6d5a5f; --oro:#d9a441;
+      --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; background:var(--crema); color:var(--tinta); }
+    .pas * { cursor:auto; }
+    .pas a, .pas button, .pas summary, .pas select, .pas label, .pas input[type=range], .pas input[type=checkbox], .pas input[type=radio] { cursor:pointer; }
+    .pas .wrap { max-width:1160px; }
+    .p-h { font-family:var(--serif); font-weight:500; letter-spacing:-.01em; line-height:1.06; margin:0; }
+    .p-h em { font-style:italic; color:var(--fr); }
+    .p-eye { text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; color:var(--fr); margin:0 0 .8rem; }
+    .p-lead { color:var(--gris); font-size:1.12rem; max-width:34em; }
+    .p-btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; padding:.7rem 1.5rem; border-radius:999px; background:var(--fr); color:#fff; font:inherit; font-weight:600; text-decoration:none; border:0; transition:background .25s, transform .25s; }
+    .p-btn:hover { background:var(--fr-2); transform:translateY(-2px); }
+    .p-btn--line { background:transparent; color:var(--tinta); border:1.5px solid rgba(58,35,41,.25); }
+    .p-btn--line:hover { background:#fff; color:var(--tinta); }
+
+    .p-head { position:sticky; top:0; z-index:20; background:rgba(255,248,242,.93); backdrop-filter:blur(10px); border-bottom:1px solid rgba(58,35,41,.08); }
+    .p-head .wrap { display:flex; align-items:center; gap:1.2rem; min-height:76px; }
+    .p-logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--tinta); line-height:1.1; }
+    .p-logo img { width:48px; height:48px; }
+    .p-logo b { display:block; font-family:var(--serif); font-weight:600; font-size:1.3rem; }
+    .p-logo small { display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gris); }
+    .p-nav { margin-left:auto; display:flex; gap:1.2rem; }
+    .p-nav a { color:var(--tinta); text-decoration:none; font-size:.93rem; }
+    .p-nav a:hover { color:var(--fr); }
+    .p-head .p-btn { min-height:44px; padding:.5rem 1.2rem; font-size:.93rem; }
+
+    /* Portada de cine */
+    .p-hero { position:relative; min-height:calc(100svh - 76px); display:grid; align-items:end; color:#fff; overflow:hidden; background:var(--choc); }
+    .p-hero__bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 50%; }
+    .p-hero::before { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(43,22,22,.9) 0%,rgba(43,22,22,.55) 50%,rgba(43,22,22,.1) 100%), linear-gradient(0deg,rgba(43,22,22,.5),transparent 45%); }
+    .p-hero .wrap { position:relative; z-index:2; display:grid; grid-template-columns:1.25fr .75fr; gap:2rem; align-items:center; padding:clamp(3rem,9vh,6rem) 0 clamp(4rem,11vh,7rem); }
+    .p-hero h1 { color:#fff; font-size:clamp(3.2rem,1.4rem + 6.4vw,7rem); line-height:.98; margin-bottom:1.2rem; }
+    .p-hero h1 em { color:#f6c1d1; }
+    .p-hero .p-eye { color:#f3c6d4; }
+    .p-hero .p-lead { color:rgba(255,255,255,.88); }
+    .p-cta { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.8rem 0 2rem; }
+    .p-hero .p-btn--line { color:#fff; border-color:rgba(255,255,255,.55); }
+    .p-hero .p-btn--line:hover { background:#fff; color:var(--tinta); }
+    .p-trust { display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; margin:0; padding:0; list-style:none; color:rgba(255,255,255,.85); font-size:.95rem; }
+    .p-trust li { display:flex; align-items:center; gap:.45rem; }
+    .p-trust li::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--oro); box-shadow:0 0 0 3px rgba(217,164,65,.25); }
+    .p-gift { justify-self:end; display:flex; gap:.9rem; align-items:center; max-width:21rem; background:#fff; color:var(--tinta); border-radius:20px; padding:1rem; box-shadow:0 18px 40px -18px rgba(0,0,0,.45); margin:0; animation:flota 6s ease-in-out infinite; }
+    .p-gift svg { width:64px; height:64px; flex:none; }
+    .p-gift b { display:block; font-family:var(--serif); font-size:1.15rem; color:var(--fr); }
+    .p-gift span { display:block; font-size:.9rem; color:var(--gris); line-height:1.4; }
+    @keyframes flota { 50% { transform:translateY(-10px); } }
+
+    .p-sec { scroll-margin-top:76px; padding:clamp(3.5rem,8vw,6.5rem) 0; }
+    .p-sec--rosa { background:var(--rosa); }
+    .p-sec--choc { background:var(--choc); color:#fff; }
+    .p-sec--choc .p-eye { color:#f3c6d4; } .p-sec--choc .p-h em { color:#f6c1d1; } .p-sec--choc .p-lead { color:rgba(255,255,255,.82); }
+    .p-sec h2 { font-size:clamp(2rem,1.3rem + 2.8vw,3.2rem); margin-bottom:.8rem; }
+    .p-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:1rem 2rem; margin-bottom:2.4rem; }
+    .p-top .p-lead { margin:0; }
+    .p-card-b { background:#fff; border-radius:28px; padding:clamp(1.3rem,3vw,2.2rem); box-shadow:0 30px 60px -40px rgba(58,35,41,.5); }
+
+    /* Arma tu queque */
+    .cons { display:grid; grid-template-columns:1fr 1.05fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
+    .cons__vista { position:sticky; top:96px; text-align:center; }
+    .cons__vista svg { width:100%; max-width:440px; height:auto; display:block; margin:0 auto; }
+    .cons__vista svg * { transition:fill .4s, opacity .4s, transform .5s cubic-bezier(.2,.7,.2,1); }
+    .cons__precio { font-family:var(--serif); font-size:2.4rem; color:var(--fr-2); margin:.6rem 0 0; }
+    .cons__precio small { display:block; font-family:inherit; font-size:.95rem; color:var(--gris); }
+    .op { border:0; padding:0; margin:0 0 1.3rem; min-width:0; }
+    .op legend { font-weight:700; font-size:.95rem; margin-bottom:.6rem; padding:0; }
+    .op__fila { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip input { position:absolute; opacity:0; }
+    .chip span { display:inline-flex; align-items:center; gap:.45rem; min-height:44px; padding:.45rem 1rem; border-radius:999px; border:1.5px solid rgba(58,35,41,.16); background:#fff; font-size:.93rem; transition:all .2s; }
+    .chip input:checked + span { background:var(--fr); border-color:var(--fr); color:#fff; }
+    .chip input:focus-visible + span { outline:3px solid var(--rosa-2); }
+    .chip i { width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,.15); display:inline-block; }
+    .chip small { opacity:.75; }
+    .op input[type=text] { width:100%; box-sizing:border-box; min-height:48px; padding:.6rem .9rem; border-radius:14px; border:1.5px solid rgba(58,35,41,.18); background:var(--crema); font:inherit; }
+    .op input[type=text]:focus { outline:3px solid var(--rosa-2); border-color:var(--fr); }
+
+    /* ¿Cuántos invitados? */
+    .inv { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; }
+    .inv__n { font-family:var(--serif); font-size:4rem; line-height:1; color:var(--fr); }
+    .inv input[type=range] { width:100%; accent-color:var(--fr); height:32px; }
+    .inv__res { background:var(--rosa); border-radius:20px; padding:1.2rem 1.4rem; }
+    .inv__res h3 { font-family:var(--serif); font-weight:600; font-size:1.4rem; margin:0 0 .3rem; }
+    .inv__res p { margin:0 0 .8rem; color:var(--gris); }
+
+    /* Mesa de dulces */
+    .mesa { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
+    .mesa__foto img { width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; border-radius:28px; display:block; }
+    .mesa__items { list-style:none; margin:0 0 1rem; padding:0; }
+    .mesa__items li { display:grid; grid-template-columns:1fr auto auto; gap:.8rem; align-items:center; padding:.7rem 0; border-bottom:1px dashed rgba(58,35,41,.15); }
+    .mesa__items small { display:block; color:var(--gris); font-size:.82rem; }
+    .step { display:flex; align-items:center; gap:.3rem; }
+    .step button { width:36px; height:36px; border-radius:50%; border:1.5px solid var(--rosa-2); background:var(--rosa); color:var(--fr-2); font:inherit; font-weight:700; font-size:1.1rem; }
+    .step output { min-width:2.4rem; text-align:center; font-weight:700; }
+    .mesa__sub { min-width:4.5rem; text-align:right; color:var(--fr-2); font-weight:600; }
+    .mesa__total { display:flex; justify-content:space-between; align-items:baseline; font-family:var(--serif); font-size:1.8rem; color:var(--fr-2); margin:.4rem 0 1rem; }
+    .mesa__total span { font-family:inherit; font-size:1rem; color:var(--gris); }
+
+    /* Productos */
+    .prods { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+    .prod { background:#fff; border-radius:22px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 20px 40px -32px rgba(58,35,41,.5); transition:transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+    .prod:hover { transform:translateY(-6px); box-shadow:0 30px 50px -30px rgba(58,35,41,.55); }
+    .prod .m { overflow:hidden; } .prod img { width:100%; height:auto; aspect-ratio:1; object-fit:cover; display:block; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+    .prod:hover img { transform:scale(1.07); }
+    .prod > div:not(.m) { padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:.3rem; flex:1; }
+    .prod h3 { font-family:var(--serif); font-weight:600; font-size:1.2rem; margin:0; }
+    .prod p { margin:0; color:var(--gris); font-size:.92rem; }
+    .prod b { color:var(--fr-2); margin-top:auto; padding-top:.4rem; }
+    .prod .tag { align-self:flex-start; background:var(--oro); color:#fff; font-size:.72rem; font-weight:700; border-radius:999px; padding:.15rem .6rem; }
+
+    /* Sopla las velas */
+    .velas { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; position:relative; }
+    .velas svg { width:100%; max-width:380px; display:block; margin:0 auto; }
+    .velas__boton { background:none; border:0; padding:0; display:block; width:100%; }
+    .llama { transform-origin:center bottom; animation:titila .25s ease-in-out infinite alternate; transition:opacity .3s, transform .3s; }
+    .llama:nth-of-type(2) { animation-duration:.3s; } .llama:nth-of-type(3) { animation-duration:.22s; }
+    @keyframes titila { from { transform:scale(1,1) skewX(-3deg); } to { transform:scale(.92,1.08) skewX(3deg); } }
+    .apagadas .llama { opacity:0; transform:scale(.2); animation:none; }
+    .humo { opacity:0; }
+    .apagadas .humo { animation:humo 1.6s ease-out forwards; }
+    @keyframes humo { 0% { opacity:.7; transform:translateY(0); } 100% { opacity:0; transform:translateY(-40px); } }
+    #confeti { position:absolute; inset:-40px 0 0; width:100%; height:calc(100% + 40px); pointer-events:none; }
+
+    /* Galería por ocasión */
+    .oc { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.4rem; }
+    .oc button { min-height:44px; padding:.4rem 1.1rem; border-radius:999px; border:1.5px solid rgba(58,35,41,.16); background:#fff; font:inherit; font-size:.93rem; }
+    .oc button[aria-pressed="true"] { background:var(--fr); border-color:var(--fr); color:#fff; }
+    .gal { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+    .gal figure { margin:0; border-radius:20px; overflow:hidden; position:relative; transition:opacity .4s, transform .4s; }
+    .gal figure.fuera { display:none; }
+    .gal img { width:100%; height:auto; aspect-ratio:1; object-fit:cover; display:block; transition:transform .7s; }
+    .gal figure:hover img { transform:scale(1.05); }
+    .gal figcaption { position:absolute; left:.6rem; bottom:.6rem; background:rgba(58,35,41,.72); color:#fff; font-size:.78rem; font-weight:600; border-radius:999px; padding:.2rem .7rem; }
+
+    /* Frase */
+    .p-band { position:relative; padding:clamp(5rem,12vw,9rem) 0; color:#fff; background:var(--choc) url("../assets/ejemplo-pasteleria/franja.jpg") center/cover; }
+    .p-band::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(43,22,22,.88),rgba(43,22,22,.3)); }
+    .p-band .wrap { position:relative; }
+    .p-band p { font-family:var(--serif); font-style:italic; font-size:clamp(1.9rem,1.2rem + 3vw,3.4rem); line-height:1.15; max-width:15em; margin:0; }
+
+    /* Preguntas */
+    .p-faq { max-width:820px; }
+    .p-faq details { border-bottom:1px solid rgba(58,35,41,.12); }
+    .p-faq summary { list-style:none; display:flex; justify-content:space-between; gap:1rem; align-items:center; padding:1.2rem 0; font-weight:600; font-size:1.08rem; min-height:44px; }
+    .p-faq summary::-webkit-details-marker { display:none; }
+    .p-faq summary::after { content:"+"; font-size:1.5rem; color:var(--fr); transition:transform .25s; }
+    .p-faq details[open] summary::after { transform:rotate(45deg); }
+    .p-faq p { margin:0 0 1.2rem; color:var(--gris); }
+
+    /* Pedido y calendario */
+    .p-book .wrap { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(2rem,5vw,4rem); align-items:start; }
+    .p-info { display:grid; gap:1rem; margin-top:1.8rem; }
+    .p-info section { background:#fff; border-radius:20px; padding:1.2rem 1.4rem; }
+    .p-info h3 { font-family:var(--serif); font-weight:600; font-size:1.15rem; margin:0 0 .5rem; color:var(--fr-2); }
+    .p-info p { margin:0; color:var(--gris); }
+    .p-hours { width:100%; border-collapse:collapse; font-size:.95rem; }
+    .p-hours td { padding:.25rem 0; color:var(--gris); } .p-hours td + td { text-align:right; color:var(--tinta); font-weight:600; }
+    .p-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .p-form label { display:grid; gap:.35rem; font-weight:600; font-size:.92rem; }
+    .p-form .full { grid-column:1/-1; }
+    .p-form input:not([type=radio]), .p-form select { font:inherit; min-height:48px; padding:.6rem .9rem; border-radius:14px; border:1.5px solid rgba(58,35,41,.18); background:var(--crema); color:var(--tinta); width:100%; box-sizing:border-box; }
+    .p-form input:focus, .p-form select:focus { outline:3px solid var(--rosa-2); border-color:var(--fr); }
+    .resumen { grid-column:1/-1; background:var(--rosa); border-radius:16px; padding:.9rem 1.1rem; font-size:.93rem; margin:0; }
+    .cal { border:0; padding:0; margin:0; min-width:0; }
+    .cal legend { font-weight:600; font-size:.92rem; margin-bottom:.6rem; padding:0; }
+    .cal__grid { display:grid; grid-template-columns:repeat(7,1fr); gap:.35rem; }
+    .cal__grid .dow { text-align:center; font-size:.72rem; color:var(--gris); text-transform:uppercase; font-weight:700; }
+    .cal__grid button { min-height:46px; border-radius:12px; border:1.5px solid var(--rosa-2); background:#fff; font:inherit; font-weight:600; color:var(--tinta); padding:0; line-height:1.1; }
+    .cal__grid button small { display:block; font-size:.6rem; font-weight:600; color:var(--gris); }
+    .cal__grid button:disabled { background:#f1ebe7; border-color:#f1ebe7; color:#a3979a; cursor:not-allowed; }
+    .cal__grid button.lleno { text-decoration:line-through; }
+    .cal__grid button[aria-pressed="true"] { background:var(--fr); border-color:var(--fr); color:#fff; }
+    .cal__grid button[aria-pressed="true"] small { color:rgba(255,255,255,.85); }
+    .cal__ley { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin:.7rem 0 0; font-size:.82rem; color:var(--gris); }
+    .cal__ley span { display:flex; align-items:center; gap:.35rem; } .cal__ley i { width:13px; height:13px; border-radius:4px; display:inline-block; }
+    .l-disp { background:#fff; border:1.5px solid var(--rosa-2); } .l-no { background:#f1ebe7; } .l-tu { background:var(--fr); }
+    .p-out { grid-column:1/-1; background:var(--rosa); border-radius:16px; padding:1rem 1.2rem; font-size:.95rem; margin:0; }
+    .p-out[hidden] { display:none; } .p-out b { display:block; margin-bottom:.3rem; color:var(--fr-2); }
+
+    /* Asistente y botones flotantes */
+    .ai-btn { position:fixed; right:18px; bottom:88px; z-index:31; display:flex; align-items:center; gap:.5rem; min-height:48px; padding:.5rem 1.1rem .5rem .8rem; border:0; border-radius:999px; background:linear-gradient(135deg,var(--fr),#d9648d); color:#fff; font:inherit; font-weight:600; box-shadow:0 14px 30px -10px rgba(180,67,108,.7); transition:transform .25s; }
+    .ai-btn:hover { transform:translateY(-2px); }
+    .ai-btn svg { width:22px; height:22px; fill:#fff; animation:brilla 2.4s ease-in-out infinite; }
+    @keyframes brilla { 50% { transform:scale(1.18) rotate(15deg); } }
+    .ai { position:fixed; right:18px; bottom:88px; z-index:40; width:min(380px,calc(100vw - 24px)); height:min(560px,calc(100svh - 120px)); display:flex; flex-direction:column; background:#fff; border-radius:24px; box-shadow:0 30px 70px -20px rgba(58,35,41,.55); overflow:hidden; }
+    .ai[hidden] { display:none; }
+    .ai__head { display:flex; align-items:center; gap:.7rem; padding:.9rem 1rem; background:linear-gradient(135deg,var(--fr),#d9648d); color:#fff; }
+    .ai__head small { display:block; font-size:.78rem; opacity:.85; }
+    .ai__av { width:38px; height:38px; border-radius:50%; background:#fff; display:grid; place-items:center; flex:none; } .ai__av img { width:30px; height:30px; }
+    .ai__x { margin-left:auto; width:40px; height:40px; border:0; border-radius:50%; background:rgba(255,255,255,.2); color:#fff; font-size:1rem; }
+    .ai__log { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:.6rem; background:var(--crema); }
+    .ai__m { max-width:85%; padding:.6rem .9rem; border-radius:16px; font-size:.95rem; line-height:1.45; }
+    .ai__m--bot { align-self:flex-start; background:#fff; border-bottom-left-radius:4px; box-shadow:0 4px 10px -8px rgba(58,35,41,.4); }
+    .ai__m--yo { align-self:flex-end; background:var(--fr); color:#fff; border-bottom-right-radius:4px; }
+    .ai__m a { display:inline-block; margin-top:.5rem; font-weight:600; color:var(--fr); }
+    .ai__dots { display:flex; gap:4px; } .ai__dots i { width:7px; height:7px; border-radius:50%; background:#e2a9bb; animation:punto 1s infinite; } .ai__dots i:nth-child(2) { animation-delay:.15s; } .ai__dots i:nth-child(3) { animation-delay:.3s; }
+    @keyframes punto { 50% { transform:translateY(-4px); opacity:.5; } }
+    .ai__chips { display:flex; gap:.4rem; overflow-x:auto; padding:.6rem 1rem 0; }
+    .ai__chips button { flex:none; min-height:36px; border:1.5px solid var(--rosa-2); background:var(--rosa); color:var(--fr-2); border-radius:999px; padding:.3rem .8rem; font:inherit; font-size:.85rem; font-weight:600; }
+    .ai__form { display:flex; gap:.5rem; padding:.7rem 1rem 1rem; }
+    .ai__form input { flex:1; min-height:46px; border-radius:999px; border:1.5px solid rgba(58,35,41,.18); padding:0 1rem; font:inherit; background:var(--crema); }
+    .ai__form button { width:46px; height:46px; border-radius:50%; border:0; background:var(--fr); display:grid; place-items:center; } .ai__form button svg { width:20px; height:20px; fill:#fff; }
+    .p-wa { position:fixed; right:18px; bottom:18px; z-index:30; width:58px; height:58px; border-radius:50%; background:#25d366; display:grid; place-items:center; box-shadow:0 12px 26px -8px rgba(0,0,0,.35); }
+    .p-wa svg { width:30px; height:30px; fill:#fff; }
+    .p-foot { background:var(--choc); color:rgba(255,255,255,.75); padding:2.4rem 0; font-size:.92rem; }
+    .p-foot .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:center; } .p-foot a { color:#fff; }
+
+    .fx [data-r] { opacity:0; transform:translateY(34px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0s); }
+    .fx [data-r].in { opacity:1; transform:none; }
+    .fx .p-hero h1 .w { display:inline-block; opacity:0; transform:translateY(.5em); animation:sube .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--d,0s); }
+    @keyframes sube { to { opacity:1; transform:none; } }
+    .fx .p-hero__bg { animation:acerca 2.4s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes acerca { from { transform:scale(1.12); filter:blur(6px); } to { transform:none; filter:none; } }
+
+    @media (max-width: 1100px) { .p-nav { gap:.8rem; } .p-nav a { font-size:.86rem; } .prods { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width: 960px) {
+      .p-nav { display:none; } .p-head .p-btn { margin-left:auto; }
+      .p-hero .wrap, .cons, .inv, .mesa, .velas, .p-book .wrap { grid-template-columns:1fr; }
+      .p-gift { justify-self:start; }
+      .cons__vista { position:static; }
+      .prods, .gal { grid-template-columns:1fr 1fr; }
+      .mesa__foto img { aspect-ratio:4/3; }
+      .ai-btn span { display:none; } .ai-btn { padding:0; width:58px; justify-content:center; }
+    }
+    @media (max-width: 520px) {
+      .p-logo small { display:none; } .p-form { grid-template-columns:1fr; } .p-cta .p-btn { width:100%; }
+      .mesa__items li { grid-template-columns:1fr auto; } .mesa__sub { grid-column:2; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pas *, .pas *::before { transition:none !important; animation:none !important; }
+      .fx [data-r] { opacity:1; transform:none; }
+    }
+    .ex-qr h3 { color:var(--fr-2); }
+  </style>
+</head>
+<body class="pas">
+  <div class="ribbon"><div class="wrap"><span>Ejemplo 2 · Dulce Encanto en paquete <b>Ultra Plus</b> (desde USD 770) · Así se vería una web hecha por Benemeo Studio</span><span><a data-back href="../index.html#ejemplos">&larr; Volver</a> &nbsp;·&nbsp; <a href="../index.html?paquete=Ultra%20Plus#propuesta">Quiero este paquete</a></span></div></div>
+  <script data-volver>/* Volver: si vienes de la portada, regresa al instante y al mismo lugar */document.querySelectorAll('.ribbon a[data-back]').forEach(function(a){a.addEventListener('click',function(e){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){e.preventDefault();history.back();}}catch(x){}});});</script>
+
+  <header class="p-head"><div class="wrap">
+    <a class="p-logo" href="#inicio"><img src="../assets/ejemplo-pasteleria/logo-encanto.svg" width="48" height="48" alt=""><span><b>Dulce Encanto</b><small>Pastelería</small></span></a>
+    <nav class="p-nav" aria-label="Secciones">
+      <a href="#arma">Arma tu queque</a><a href="#mesa">Mesa de dulces</a><a href="#productos">Productos</a><a href="#ocasiones">Ocasiones</a><a href="#pedido">Pedidos</a>
+    </nav>
+    <a class="p-btn" href="#pedido">Pedir</a>
+  </div></header>
+
+  <main id="inicio">
+    <section class="p-hero">
+      <video class="p-hero__bg p-vid" src="../assets/ejemplo-pasteleria/video-portada.mp4" poster="../assets/ejemplo-pasteleria/video-portada-poster.jpg" width="1280" height="720" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+      <div class="wrap">
+        <div>
+          <p class="p-eye">Pastelería artesanal · Hecho con cariño</p>
+          <h1 class="p-h">Dulces que <em>encantan</em></h1>
+          <p class="p-lead">Queques, tortas frías, torta chilena, tartaletas y mesas de dulces para toda ocasión.</p>
+          <div class="p-cta">
+            <a class="p-btn" href="#arma">Arma tu queque</a>
+            <a class="p-btn p-btn--line" href="#mesa">Arma tu mesa de dulces</a>
+          </div>
+          <ul class="p-trust"><li>Hecho a mano cada día</li><li>Retiro o envío</li><li>Pide con 3 días</li></ul>
+        </div>
+        <div class="p-gift"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="26" width="48" height="32" rx="6" fill="#fbe9ee" stroke="#b4436c" stroke-width="2.5"/><rect x="5" y="18" width="54" height="11" rx="4" fill="#b4436c"/><rect x="29" y="18" width="6" height="40" fill="#d9a441"/><path d="M32 18c-6-10-16-6-11 0M32 18c6-10 16-6 11 0" fill="none" stroke="#d9a441" stroke-width="3" stroke-linecap="round"/></svg><p><b>Regalo en tu primer pedido</b><span>Una bolsa de galletas de mantequilla va por nuestra cuenta.</span></p></div>
+      </div>
+    </section>
+
+    <section class="p-sec p-sec--rosa" id="arma"><div class="wrap">
+      <div class="p-top" data-r>
+        <div><p class="p-eye">Arma tu queque</p><h2 class="p-h">Diséñalo y <em>míralo al instante</em></h2></div>
+        <p class="p-lead">Elige pisos, sabor, relleno, cobertura y decoración. El precio se actualiza solo.</p>
+      </div>
+      <div class="cons" data-r>
+        <div class="cons__vista p-card-b">
+          <svg id="queque" viewBox="0 0 400 380" role="img" aria-label="Vista previa de tu queque"></svg>
+          <p class="cons__precio"><span id="c-precio">$35</span><small id="c-resumen">1 piso · 15 porciones</small></p>
+        </div>
+        <form class="p-card-b" id="cons" onsubmit="return false">
+          <fieldset class="op"><legend>Tamaño</legend><div class="op__fila">
+            <label class="chip"><input type="radio" name="pisos" value="1" checked><span>1 piso <small>15 porciones · $35</small></span></label>
+            <label class="chip"><input type="radio" name="pisos" value="2"><span>2 pisos <small>35 · $75</small></span></label>
+            <label class="chip"><input type="radio" name="pisos" value="3"><span>3 pisos <small>60 · $130</small></span></label>
+          </div></fieldset>
+          <fieldset class="op"><legend>Sabor del bizcocho</legend><div class="op__fila">
+            <label class="chip"><input type="radio" name="sabor" value="Vainilla" checked><span><i style="background:#f3d9a4"></i>Vainilla</span></label>
+            <label class="chip"><input type="radio" name="sabor" value="Chocolate"><span><i style="background:#5a3326"></i>Chocolate</span></label>
+            <label class="chip"><input type="radio" name="sabor" value="Zanahoria"><span><i style="background:#c9813f"></i>Zanahoria</span></label>
+            <label class="chip"><input type="radio" name="sabor" value="Red velvet"><span><i style="background:#a3283b"></i>Red velvet</span></label>
+          </div></fieldset>
+          <fieldset class="op"><legend>Relleno</legend><div class="op__fila">
+            <label class="chip"><input type="radio" name="relleno" value="Dulce de leche" checked><span>Dulce de leche</span></label>
+            <label class="chip"><input type="radio" name="relleno" value="Crema pastelera"><span>Crema pastelera</span></label>
+            <label class="chip"><input type="radio" name="relleno" value="Fresa"><span>Fresa</span></label>
+            <label class="chip"><input type="radio" name="relleno" value="Chocolate"><span>Chocolate</span></label>
+          </div></fieldset>
+          <fieldset class="op"><legend>Cobertura</legend><div class="op__fila">
+            <label class="chip"><input type="radio" name="cob" value="Crema blanca" checked><span><i style="background:#fffdf8"></i>Crema blanca</span></label>
+            <label class="chip"><input type="radio" name="cob" value="Rosa"><span><i style="background:#f6c1d1"></i>Rosa</span></label>
+            <label class="chip"><input type="radio" name="cob" value="Chocolate"><span><i style="background:#6b3f2f"></i>Chocolate</span></label>
+            <label class="chip"><input type="radio" name="cob" value="Menta"><span><i style="background:#c9ead9"></i>Menta</span></label>
+          </div></fieldset>
+          <fieldset class="op"><legend>Decoración</legend><div class="op__fila">
+            <label class="chip"><input type="checkbox" name="deco" value="Flores" data-p="8"><span>Flores <small>+$8</small></span></label>
+            <label class="chip"><input type="checkbox" name="deco" value="Frutas" data-p="6"><span>Frutas <small>+$6</small></span></label>
+            <label class="chip"><input type="checkbox" name="deco" value="Chispas" data-p="4"><span>Chispas <small>+$4</small></span></label>
+            <label class="chip"><input type="checkbox" name="deco" value="Velas" data-p="3" checked><span>Velas <small>+$3</small></span></label>
+          </div></fieldset>
+          <div class="op"><label for="c-msg" style="font-weight:700;font-size:.95rem">Mensaje en el queque</label>
+            <input type="text" id="c-msg" maxlength="22" placeholder="Ej.: Feliz cumple, Ana" style="margin-top:.6rem"></div>
+          <a class="p-btn" href="#pedido" id="c-pedir">Pedir este queque</a>
+        </form>
+      </div>
+    </div></section>
+
+    <section class="p-sec" id="invitados"><div class="wrap">
+      <div class="inv p-card-b" data-r>
+        <div>
+          <p class="p-eye">¿Cuántos invitados?</p>
+          <h2 class="p-h" style="font-size:clamp(1.8rem,1.2rem + 2vw,2.6rem)">Te decimos qué <em>tamaño</em> pedir</h2>
+          <p class="inv__n"><span id="i-n">20</span> <small style="font-size:1.1rem;color:var(--gris)">invitados</small></p>
+          <input type="range" id="i-rango" min="5" max="120" step="5" value="20" aria-label="Número de invitados">
+        </div>
+        <div class="inv__res" aria-live="polite">
+          <h3 id="i-tit"></h3>
+          <p id="i-txt"></p>
+          <button type="button" class="p-btn" id="i-usar">Usar este tamaño</button>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="p-sec p-sec--rosa" id="mesa"><div class="wrap">
+      <div class="p-top" data-r>
+        <div><p class="p-eye">Mesa de dulces para toda ocasión</p><h2 class="p-h">Arma tu <em>mesa de dulces</em></h2></div>
+        <p class="p-lead">Elige la ocasión y los invitados: te proponemos las cantidades y puedes ajustarlas.</p>
+      </div>
+      <div class="mesa" data-r>
+        <div class="mesa__foto"><img src="../assets/ejemplo-pasteleria/mesa-dulces.jpg" width="1000" height="667" alt="Mesa de dulces decorada para un evento" loading="lazy"></div>
+        <div class="p-card-b">
+          <fieldset class="op"><legend>Ocasión</legend><div class="op__fila" id="m-oc">
+            <label class="chip"><input type="radio" name="oc" value="Cumpleaños" checked><span>Cumpleaños</span></label>
+            <label class="chip"><input type="radio" name="oc" value="Boda"><span>Boda</span></label>
+            <label class="chip"><input type="radio" name="oc" value="Bautizo"><span>Bautizo</span></label>
+            <label class="chip"><input type="radio" name="oc" value="Baby shower"><span>Baby shower</span></label>
+            <label class="chip"><input type="radio" name="oc" value="Empresa"><span>Empresa</span></label>
+          </div></fieldset>
+          <div class="op"><label for="m-inv" style="font-weight:700;font-size:.95rem">Invitados: <span id="m-inv-n">30</span></label>
+            <input type="range" id="m-inv" min="10" max="150" step="5" value="30" style="width:100%;accent-color:var(--fr);height:32px"></div>
+          <ul class="mesa__items" id="m-items"></ul>
+          <p class="mesa__total"><span>Total estimado</span><b id="m-total">$0</b></p>
+          <a class="p-btn" href="#pedido" id="m-pedir">Cotizar mi mesa</a>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="p-sec" id="productos"><div class="wrap">
+      <div class="p-top" data-r>
+        <div><p class="p-eye">Productos</p><h2 class="p-h">Para cada <em>antojo</em></h2></div>
+        <p class="p-lead">Precios de referencia en dólares.</p>
+      </div>
+      <div class="prods">
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/queques.jpg" width="667" height="1000" alt="Queque decorado de varios pisos" loading="lazy"></div><div><h3>Queques de ocasión</h3><p>Personalizados para tu fiesta.</p><b>desde $35</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/torta-fria.jpg" width="667" height="1000" alt="Torta fría con merengue rosado" loading="lazy"></div><div><h3>Tortas frías</h3><p>Suaves y cremosas, con merengue.</p><b>desde $30</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/torta-chilena.jpg" width="758" height="1000" alt="Porción de torta de capas con crema" loading="lazy"></div><div><h3>Torta chilena</h3><p>Capas finas con dulce de leche.</p><b>desde $40</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/queque-zanahoria.jpg" width="1000" height="667" alt="Queque de zanahoria con betún" loading="lazy"></div><div><h3>Queque de zanahoria</h3><p>Húmedo, con nueces y betún.</p><b>$28</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/tartaletas.jpg" width="1000" height="667" alt="Tartaletas de frutas frescas" loading="lazy"></div><div><h3>Tartaletas de frutas</h3><p>Crema pastelera y fruta fresca.</p><b>docena $22</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/quequitos-navidad.jpg" width="667" height="1000" alt="Queque navideño con velas" loading="lazy"></div><div><span class="tag">Temporada</span><h3>Quequitos de Navidad</h3><p>Con frutas confitadas.</p><b>docena $20</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/galletas.jpg" width="561" height="1000" alt="Galletas de mantequilla con mermelada" loading="lazy"></div><div><h3>Galletas de mantequilla</h3><p>Bolsa de 24 galletas.</p><b>$12</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/dulces.jpg" width="667" height="1000" alt="Postres individuales surtidos" loading="lazy"></div><div><h3>Dulces surtidos</h3><p>Mini postres para compartir.</p><b>desde $15</b></div></article>
+      </div>
+    </div></section>
+
+    <section class="p-sec p-sec--choc" id="velas"><div class="wrap">
+      <div class="velas">
+        <div data-r>
+          <p class="p-eye">Sopla las velas</p>
+          <h2 class="p-h">Pide un <em>deseo</em> y toca el queque</h2>
+          <p class="p-lead">Así de bonito se siente celebrar con un queque hecho para ti.</p>
+          <div class="p-cta"><a class="p-btn" href="#arma">Armar mi queque</a><button type="button" class="p-btn p-btn--line" id="v-otra" style="color:#fff;border-color:rgba(255,255,255,.5)">Encender de nuevo</button></div>
+          <p id="v-msg" aria-live="polite" style="font-family:var(--serif);font-size:1.4rem;color:#f6c1d1;min-height:2em;margin:0"></p>
+        </div>
+        <button type="button" class="velas__boton" id="v-boton" aria-label="Soplar las velas">
+          <svg viewBox="0 0 300 260" id="v-svg">
+            <ellipse cx="150" cy="238" rx="120" ry="14" fill="#2a1717"/>
+            <rect x="50" y="150" width="200" height="85" rx="14" fill="#fbe9ee"/>
+            <path d="M50 170c20 14 30 14 50 0s30-14 50 0 30 14 50 0 30-14 50 0" fill="none" stroke="#e8a3b8" stroke-width="8" stroke-linecap="round"/>
+            <rect x="50" y="205" width="200" height="8" fill="#b4436c" opacity=".35"/>
+            <g id="v-velas">
+              <rect x="95" y="100" width="12" height="52" rx="4" fill="#f6c1d1"/><rect x="144" y="92" width="12" height="60" rx="4" fill="#fff"/><rect x="193" y="100" width="12" height="52" rx="4" fill="#f6c1d1"/>
+              <path class="llama" d="M101 76c8 10 9 16 0 24-9-8-8-14 0-24z" fill="#f7b733"/>
+              <path class="llama" d="M150 68c8 10 9 16 0 24-9-8-8-14 0-24z" fill="#f7b733"/>
+              <path class="llama" d="M199 76c8 10 9 16 0 24-9-8-8-14 0-24z" fill="#f7b733"/>
+              <path class="humo" d="M101 96c-4-8 4-10 0-18" fill="none" stroke="#ccc" stroke-width="3" stroke-linecap="round"/>
+              <path class="humo" d="M150 88c-4-8 4-10 0-18" fill="none" stroke="#ccc" stroke-width="3" stroke-linecap="round"/>
+              <path class="humo" d="M199 96c-4-8 4-10 0-18" fill="none" stroke="#ccc" stroke-width="3" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </button>
+        <canvas id="confeti" aria-hidden="true"></canvas>
+      </div>
+    </div></section>
+
+    <section class="p-sec" id="ocasiones"><div class="wrap">
+      <div class="p-top" data-r><div><p class="p-eye">Galería por ocasión</p><h2 class="p-h">Para cada <em>celebración</em></h2></div></div>
+      <div class="oc" role="group" aria-label="Filtrar por ocasión">
+        <button type="button" data-f="todas" aria-pressed="true">Todas</button><button type="button" data-f="cumple" aria-pressed="false">Cumpleaños</button><button type="button" data-f="boda" aria-pressed="false">Bodas</button><button type="button" data-f="bebe" aria-pressed="false">Bautizos y baby shower</button><button type="button" data-f="empresa" aria-pressed="false">Empresa</button>
+      </div>
+      <div class="gal" data-r>
+        <figure data-oc="cumple"><img src="../assets/ejemplo-pasteleria/g-cumple-1.jpg" width="1000" height="667" alt="Niña frente a su queque de cumpleaños" loading="lazy"><figcaption>Cumpleaños</figcaption></figure>
+        <figure data-oc="boda"><img src="../assets/ejemplo-pasteleria/g-boda-1.jpg" width="665" height="1000" alt="Queque de boda de varios pisos" loading="lazy"><figcaption>Boda</figcaption></figure>
+        <figure data-oc="bebe"><img src="../assets/ejemplo-pasteleria/g-baby-1.jpg" width="1000" height="667" alt="Mesa de baby shower en celeste" loading="lazy"><figcaption>Baby shower</figcaption></figure>
+        <figure data-oc="cumple"><img src="../assets/ejemplo-pasteleria/g-cumple-2.jpg" width="1000" height="667" alt="Queque de 50 años con confeti" loading="lazy"><figcaption>Cumpleaños</figcaption></figure>
+        <figure data-oc="empresa"><img src="../assets/ejemplo-pasteleria/g-empresa-1.jpg" width="667" height="1000" alt="Bocadillos dulces en un evento" loading="lazy"><figcaption>Empresa</figcaption></figure>
+        <figure data-oc="boda"><img src="../assets/ejemplo-pasteleria/g-boda-2.jpg" width="1000" height="667" alt="Queque de boda decorado con flores" loading="lazy"><figcaption>Boda</figcaption></figure>
+        <figure data-oc="bebe"><img src="../assets/ejemplo-pasteleria/g-bautizo-1.jpg" width="1000" height="667" alt="Mesa de dulces para bautizo" loading="lazy"><figcaption>Bautizo</figcaption></figure>
+        <figure data-oc="empresa"><img src="../assets/ejemplo-pasteleria/mesa-dulces-2.jpg" width="1000" height="667" alt="Mesa de postres elegante" loading="lazy"><figcaption>Empresa</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="p-band" aria-label="Frase"><div class="wrap"><p data-r>Todo sabe mejor cuando se comparte.</p></div></section>
+
+    <section class="p-sec p-sec--rosa" id="preguntas"><div class="wrap">
+      <div class="p-top" data-r><div><p class="p-eye">Preguntas</p><h2 class="p-h">Antes de tu <em>pedido</em></h2></div></div>
+      <div class="p-faq" data-r>
+        <details><summary>¿Con cuánta anticipación pido?</summary><p>Con 3 días como mínimo. Para bodas y mesas de dulces grandes, lo ideal es una a dos semanas.</p></details>
+        <details><summary>¿Cómo pago?</summary><p>Apartas tu fecha con el 50 % por transferencia y pagas el resto al recibir.</p></details>
+        <details><summary>¿Hacen envíos?</summary><p>Sí, en San José y alrededores, por $5. También puedes retirar en la tienda.</p></details>
+        <details><summary>¿Tienen opciones sin azúcar o sin gluten?</summary><p>Sí, por encargo. Escríbenos y te contamos qué sabores tenemos.</p></details>
+        <details><summary>¿Montan la mesa de dulces?</summary><p>Sí. El precio incluye el montaje y la decoración según la ocasión.</p></details>
+      </div>
+    </div></section>
+
+    <section class="p-sec p-book" id="pedido"><div class="wrap bk">
+      <div class="bk__head">
+        <p class="p-eye">Pedidos</p>
+        <h2 class="p-h">Elige la <em>fecha de entrega</em></h2>
+      </div>
+      <div class="bk__main">
+        <p class="p-lead">Mira los días disponibles, elige retiro o envío y tu pedido llega listo a WhatsApp.</p>
+        <form class="p-form p-card-b" id="pedido-f" data-r novalidate>
+        <p class="resumen" id="p-resumen">Tu pedido: elige un queque en "Arma tu queque", una mesa de dulces o escríbelo aquí.</p>
+        <label class="full">¿Qué quieres pedir?<input name="que" id="p-que" placeholder="Ej.: torta chilena para 20 personas"></label>
+        <label>Tu nombre<input name="nombre" autocomplete="given-name"></label>
+        <label>Entrega<select name="entrega"><option>Retiro en la tienda</option><option>Envío a domicilio (+$5)</option></select></label>
+        <fieldset class="full cal"><legend>Fecha de entrega</legend><div class="cal__grid" id="cal"></div>
+          <p class="cal__ley"><span><i class="l-disp"></i>Disponible</span><span><i class="l-no"></i>Muy pronto o lleno</span><span><i class="l-tu"></i>Tu fecha</span></p></fieldset>
+        <div class="full"><button class="p-btn" type="submit">Enviar pedido por WhatsApp</button></div>
+        <p class="p-out" role="status" hidden></p>
+      </form>
+      </div>
+      <section class="ex-qr" aria-label="Código QR de WhatsApp">
+          <img src="../assets/qr-ejemplo.svg" width="200" height="200" alt="Código QR para escribir por WhatsApp">
+          <h3>Escanea y escríbenos por WhatsApp</h3>
+        </section>
+      <div class="p-info" data-r>
+          <section aria-labelledby="h-hor"><h3 id="h-hor">Horario de la tienda</h3>
+            <table class="p-hours"><tbody><tr><td>Martes a sábado</td><td>9:00 a. m. a 7:00 p. m.</td></tr><tr><td>Domingo</td><td>9:00 a. m. a 2:00 p. m.</td></tr><tr><td>Lunes</td><td>Cerrado</td></tr></tbody></table></section>
+          <section aria-labelledby="h-don"><h3 id="h-don">Dónde estamos</h3><p>Barrio Escalante, San José, del parque 100 m al este.</p></section>
+        </div>
+    </div></section>
+  </main>
+
+  <button class="ai-btn" type="button" aria-expanded="false" aria-controls="ai"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z"/></svg><span>Pregúntale a Dulce Encanto</span></button>
+  <section class="ai" id="ai" hidden aria-label="Asistente de Dulce Encanto">
+    <header class="ai__head"><span class="ai__av"><img src="../assets/ejemplo-pasteleria/logo-encanto.svg" width="30" height="30" alt=""></span><span><b>Asistente de Dulce Encanto</b><small>Responde al instante · demostración</small></span><button type="button" class="ai__x" aria-label="Cerrar asistente">✕</button></header>
+    <div class="ai__log" role="log" aria-live="polite"></div>
+    <div class="ai__chips"></div>
+    <form class="ai__form"><input name="q" autocomplete="off" placeholder="Escribe tu pregunta…" aria-label="Tu pregunta"><button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button></form>
+  </section>
+  <a class="p-wa" href="#pedido" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg></a>
+
+  <footer class="p-foot"><div class="wrap"><span>Dulce Encanto Pastelería · Queques, tortas y mesas de dulces</span><span>Ejemplo hecho por <a href="../index.html">Benemeo Studio</a></span></div></footer>
+
+  <script>
+  (function () {
+    var $ = function (s) { return document.querySelector(s); };
+    var pedido = $('#pedido-f'), resumen = $('#p-resumen'), que = $('#p-que');
+    function pedir(texto) { resumen.textContent = 'Tu pedido: ' + texto; que.value = texto; }
+
+    // ---------- Movimiento ----------
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, vids = [].slice.call(document.querySelectorAll('.p-vid'));
+    if (reduce) vids.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+    else {
+      document.documentElement.classList.add('fx');
+      var h1 = $('.p-hero h1'), i = 0;
+      [].slice.call(h1.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t.trim()) { frag.appendChild(document.createTextNode(t)); return; }
+            var w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--d', (0.15 + i++ * 0.14) + 's'); w.textContent = t; frag.appendChild(w);
+          });
+          h1.replaceChild(frag, n);
+        } else { n.classList.add('w'); n.style.setProperty('--d', (0.15 + i++ * 0.14) + 's'); }
+      });
+      var items = [].slice.call(document.querySelectorAll('[data-r]'));
+      items.forEach(function (el) { var sib = el.parentElement.querySelectorAll(':scope > [data-r]'); if (sib.length > 1) el.style.setProperty('--d', ([].indexOf.call(sib, el) % 4) * 0.1 + 's'); });
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+      items.forEach(function (el) { io.observe(el); });
+      var vo = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); } else e.target.pause(); }); });
+      vids.forEach(function (v) { vo.observe(v); });
+    }
+
+    // ---------- Arma tu queque ----------
+    var NS = 'http://www.w3.org/2000/svg', svg = $('#queque'), f = $('#cons');
+    var PRECIO = { 1: 35, 2: 75, 3: 130 }, PORC = { 1: 15, 2: 35, 3: 60 };
+    var SABOR = { 'Vainilla': '#f3d9a4', 'Chocolate': '#5a3326', 'Zanahoria': '#c9813f', 'Red velvet': '#a3283b' };
+    var RELL = { 'Dulce de leche': '#c98a3c', 'Crema pastelera': '#f6e7b0', 'Fresa': '#e0566f', 'Chocolate': '#3d2017' };
+    var COB = { 'Crema blanca': ['#fffdf8', '#efe4d8'], 'Rosa': ['#f6c1d1', '#e79ab2'], 'Chocolate': ['#6b3f2f', '#4e2b1f'], 'Menta': ['#c9ead9', '#9fd3bb'] };
+    function el(tag, at, padre) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); (padre || svg).appendChild(e); return e; }
+    function val(n) { var x = f.querySelector('input[name="' + n + '"]:checked'); return x ? x.value : ''; }
+    function dibujar() {
+      var pisos = +val('pisos'), sab = SABOR[val('sabor')], rel = RELL[val('relleno')], cob = COB[val('cob')];
+      var decos = [].slice.call(f.querySelectorAll('input[name=deco]:checked')).map(function (x) { return x.value; });
+      svg.innerHTML = '';
+      el('ellipse', { cx: 200, cy: 352, rx: 170, ry: 16, fill: '#e9d4cc' });
+      el('rect', { x: 40, y: 330, width: 320, height: 16, rx: 8, fill: '#fff', stroke: '#e4cfd3' });
+      var anchos = [260, 200, 140], alto = 72, y = 330, tops = [];
+      for (var p = 0; p < pisos; p++) {
+        var w = anchos[p], x = 200 - w / 2; y -= alto;
+        var g = el('g', { 'class': 'piso' });
+        el('rect', { x: x, y: y, width: w, height: alto, rx: 12, fill: cob[0], stroke: cob[1], 'stroke-width': 2 }, g);
+        // corte lateral: bizcocho y relleno a la vista
+        el('rect', { x: x + w - 46, y: y + 14, width: 34, height: alto - 22, rx: 4, fill: sab }, g);
+        el('rect', { x: x + w - 46, y: y + 30, width: 34, height: 7, fill: rel }, g);
+        el('rect', { x: x + w - 46, y: y + 48, width: 34, height: 7, fill: rel }, g);
+        // borde de crema
+        var d = 'M' + x + ' ' + (y + 8);
+        for (var k = 0; k < w; k += 20) d += ' q10 12 20 0';
+        el('path', { d: d, fill: 'none', stroke: cob[1], 'stroke-width': 4, 'stroke-linecap': 'round' }, g);
+        tops.push({ x: x, w: w, y: y });
+      }
+      var t = tops[tops.length - 1];
+      if (decos.indexOf('Chispas') > -1) tops.forEach(function (tp, n) { for (var c = 0; c < tp.w / 14; c++) el('rect', { x: tp.x + 10 + (c * 37) % (tp.w - 20), y: tp.y + 20 + (c * 23) % (alto - 30), width: 6, height: 2.5, rx: 1, fill: ['#e0566f', '#f7b733', '#4fb3a3', '#8e6ad8'][c % 4], transform: 'rotate(' + (c * 47 % 180) + ' ' + (tp.x + 13 + (c * 37) % (tp.w - 20)) + ' ' + (tp.y + 21 + (c * 23) % (alto - 30)) + ')' }); });
+      if (decos.indexOf('Flores') > -1) [0, 1, 2].forEach(function (n) { var cx = t.x + 22 + n * ((t.w - 44) / 2), cy = t.y + 2; [0, 72, 144, 216, 288].forEach(function (a) { el('circle', { cx: cx + 7 * Math.cos(a * Math.PI / 180), cy: cy + 7 * Math.sin(a * Math.PI / 180), r: 6, fill: '#f28fb0' }); }); el('circle', { cx: cx, cy: cy, r: 4, fill: '#f7d36b' }); });
+      if (decos.indexOf('Frutas') > -1) [0.3, 0.5, 0.7].forEach(function (k2, n) { var cx = t.x + t.w * k2, cy = t.y - 6; el('path', { d: 'M' + cx + ' ' + (cy - 9) + 'c9 0 12 8 6 16-3 4-9 4-12 0-6-8-3-16 6-16z', fill: '#d9334f' }); el('path', { d: 'M' + (cx - 4) + ' ' + (cy - 10) + 'l4 3 4-3', fill: 'none', stroke: '#3f9b5a', 'stroke-width': 2.5, 'stroke-linecap': 'round' }); });
+      if (decos.indexOf('Velas') > -1) [0.38, 0.5, 0.62].forEach(function (k2) { var cx = t.x + t.w * k2; el('rect', { x: cx - 3.5, y: t.y - 34, width: 7, height: 34, rx: 2, fill: '#fff', stroke: '#e79ab2' }); el('path', { d: 'M' + cx + ' ' + (t.y - 50) + 'c5 6 6 10 0 14-6-4-5-8 0-14z', fill: '#f7b733', 'class': 'llama' }); });
+      var msg = $('#c-msg').value.trim();
+      var b0 = tops[0]; if (msg) { var tx = el('text', { x: b0.x + (b0.w - 46) / 2, y: b0.y + alto / 2 + 8, 'text-anchor': 'middle', 'font-family': 'Georgia, serif', 'font-style': 'italic', 'font-weight': '600', 'font-size': Math.min(22, (b0.w - 70) / msg.length * 1.9), fill: val('cob') === 'Chocolate' ? '#fbe9ee' : '#8f2f53' }); tx.textContent = msg; }
+      var extra = decos.reduce(function (s2, d2) { return s2 + +f.querySelector('input[value="' + d2 + '"]').dataset.p; }, 0), total = PRECIO[pisos] + extra;
+      $('#c-precio').textContent = '$' + total;
+      $('#c-resumen').textContent = pisos + (pisos > 1 ? ' pisos' : ' piso') + ' · ' + PORC[pisos] + ' porciones · ' + val('sabor') + ' con ' + val('relleno').toLowerCase();
+      return { total: total, texto: 'Queque de ' + pisos + (pisos > 1 ? ' pisos' : ' piso') + ' (' + PORC[pisos] + ' porciones), bizcocho de ' + val('sabor').toLowerCase() + ', relleno de ' + val('relleno').toLowerCase() + ', cobertura ' + val('cob').toLowerCase() + (decos.length ? ', con ' + decos.join(', ').toLowerCase() : '') + (msg ? ', mensaje: "' + msg + '"' : '') + ' · $' + total };
+    }
+    f.addEventListener('change', dibujar); $('#c-msg').addEventListener('input', dibujar); dibujar();
+    $('#c-pedir').addEventListener('click', function () { pedir(dibujar().texto); });
+
+    // ---------- ¿Cuántos invitados? ----------
+    var ir = $('#i-rango'), recom = 1;
+    function invitados() {
+      var n = +ir.value; $('#i-n').textContent = n;
+      recom = n <= 15 ? 1 : n <= 35 ? 2 : 3;
+      var extraCup = n > 60 ? Math.ceil((n - 60) / 12) : 0;
+      $('#i-tit').textContent = 'Queque de ' + recom + (recom > 1 ? ' pisos' : ' piso') + ' · $' + PRECIO[recom];
+      $('#i-txt').textContent = 'Alcanza para ' + PORC[recom] + ' porciones' + (extraCup ? ' y te sugerimos ' + extraCup + (extraCup > 1 ? ' docenas' : ' docena') + ' de quequitos extra para completar.' : '.') + (n >= 40 ? ' Para tantas personas, una mesa de dulces luce increíble.' : '');
+    }
+    ir.addEventListener('input', invitados); invitados();
+    $('#i-usar').addEventListener('click', function () { f.querySelector('input[name=pisos][value="' + recom + '"]').checked = true; dibujar(); $('#arma').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
+
+    // ---------- Mesa de dulces ----------
+    var MESA = [
+      { k: 'queque', n: 'Queque principal', d: 'según invitados', unit: 0 },
+      { k: 'quequitos', n: 'Quequitos decorados', d: '$1,70 c/u', unit: 1.7, por: 1 },
+      { k: 'tartaletas', n: 'Tartaletas de frutas', d: '$1,85 c/u', unit: 1.85, por: 1 },
+      { k: 'galletas', n: 'Galletas de mantequilla', d: '$0,50 c/u', unit: 0.5, por: 2 },
+      { k: 'dulces', n: 'Dulces surtidos', d: '$0,50 c/u', unit: 0.5, por: 2 }
+    ];
+    var cant = {}, ul = $('#m-items'), mi = $('#m-inv');
+    function qPisos(n) { return n <= 15 ? 1 : n <= 35 ? 2 : 3; }
+    function proponer() { var n = +mi.value; $('#m-inv-n').textContent = n; MESA.forEach(function (m) { if (m.por) cant[m.k] = n * m.por; }); pintarMesa(); }
+    function pintarMesa() {
+      var n = +mi.value, total = 50; ul.innerHTML = '';
+      MESA.forEach(function (m) {
+        var li = document.createElement('li'), sub;
+        if (m.k === 'queque') { var p = qPisos(n); sub = PRECIO[p]; li.innerHTML = '<span><b>' + m.n + '</b><small>' + p + (p > 1 ? ' pisos' : ' piso') + ' · ' + PORC[p] + ' porciones</small></span><span></span><span class="mesa__sub">$' + sub + '</span>'; }
+        else {
+          sub = cant[m.k] * m.unit;
+          li.innerHTML = '<span><b>' + m.n + '</b><small>' + m.d + '</small></span><span class="step"><button type="button" aria-label="Menos ' + m.n + '">−</button><output>' + cant[m.k] + '</output><button type="button" aria-label="Más ' + m.n + '">+</button></span><span class="mesa__sub">$' + sub.toFixed(0) + '</span>';
+          var bs = li.querySelectorAll('button');
+          bs[0].addEventListener('click', function () { cant[m.k] = Math.max(0, cant[m.k] - 6); pintarMesa(); });
+          bs[1].addEventListener('click', function () { cant[m.k] += 6; pintarMesa(); });
+        }
+        total += sub; ul.appendChild(li);
+      });
+      var li2 = document.createElement('li'); li2.innerHTML = '<span><b>Montaje y decoración</b><small>temática: ' + val2('oc').toLowerCase() + '</small></span><span></span><span class="mesa__sub">$50</span>'; ul.appendChild(li2);
+      $('#m-total').textContent = '$' + Math.round(total);
+      return Math.round(total);
+    }
+    function val2(n) { var x = document.querySelector('input[name="' + n + '"]:checked'); return x ? x.value : ''; }
+    mi.addEventListener('input', proponer);
+    $('#m-oc').addEventListener('change', pintarMesa);
+    proponer();
+    $('#m-pedir').addEventListener('click', function () {
+      var t = pintarMesa(), n = +mi.value;
+      pedir('Mesa de dulces para ' + val2('oc').toLowerCase() + ', ' + n + ' invitados: ' + MESA.filter(function (m) { return m.por; }).map(function (m) { return cant[m.k] + ' ' + m.n.toLowerCase(); }).join(', ') + ' y queque principal · total estimado $' + t);
+    });
+
+    // ---------- Sopla las velas ----------
+    var vsvg = $('#v-svg'), cv = $('#confeti'), ctx = cv.getContext('2d'), parts = [];
+    function confeti() {
+      if (reduce) return;
+      var r = cv.getBoundingClientRect(); cv.width = r.width; cv.height = r.height;
+      parts = []; for (var k = 0; k < 140; k++) parts.push({ x: r.width * (.55 + Math.random() * .35), y: r.height * .35, vx: (Math.random() - .5) * 9, vy: -Math.random() * 10 - 4, c: ['#f6c1d1', '#d9a441', '#fff', '#e0566f', '#9fd3bb'][k % 5], s: 4 + Math.random() * 5, r: Math.random() * 6 });
+      var t0 = performance.now();
+      (function anim(now) {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        parts.forEach(function (p) { p.vy += .28; p.x += p.vx; p.y += p.vy; p.r += .1; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); ctx.restore(); });
+        if (now - t0 < 2600) requestAnimationFrame(anim); else ctx.clearRect(0, 0, cv.width, cv.height);
+      })(t0);
+    }
+    $('#v-boton').addEventListener('click', function () {
+      if (vsvg.classList.contains('apagadas')) return;
+      vsvg.classList.add('apagadas'); $('#v-msg').textContent = '¡Que se cumplan tus deseos! 🎉'; confeti();
+    });
+    $('#v-otra').addEventListener('click', function () { vsvg.classList.remove('apagadas'); $('#v-msg').textContent = ''; });
+
+    // ---------- Galería por ocasión ----------
+    document.querySelectorAll('.oc button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var fl = b.dataset.f;
+        document.querySelectorAll('.oc button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        document.querySelectorAll('.gal figure').forEach(function (fg) { fg.classList.toggle('fuera', fl !== 'todas' && fg.dataset.oc !== fl); });
+      });
+    });
+
+    // ---------- Calendario de entregas (los días llenos son de muestra) ----------
+    var cal = $('#cal'), fecha = null, hoy = new Date(); hoy.setHours(12, 0, 0, 0);
+    ['L', 'M', 'M', 'J', 'V', 'S', 'D'].forEach(function (d) { var s = document.createElement('span'); s.className = 'dow'; s.textContent = d; cal.appendChild(s); });
+    var inicio = new Date(hoy); inicio.setDate(hoy.getDate() - ((hoy.getDay() + 6) % 7));
+    for (var c = 0; c < 21; c++) {
+      var dd = new Date(inicio); dd.setDate(inicio.getDate() + c);
+      var b = document.createElement('button'); b.type = 'button';
+      var dif = Math.round((dd - hoy) / 864e5), lunes = dd.getDay() === 1, lleno = dif >= 3 && (dd.getDate() * 7) % 9 < 2;
+      var nota = dif < 0 ? '' : dif < 3 ? 'pronto' : lunes ? 'cerrado' : lleno ? 'lleno' : '';
+      b.innerHTML = dd.getDate() + (nota ? '<small>' + nota + '</small>' : '');
+      b.setAttribute('aria-label', dd.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long' }) + (nota ? ', ' + nota : ', disponible'));
+      if (dif < 3 || lunes || lleno) { b.disabled = true; if (lleno) b.classList.add('lleno'); }
+      else (function (fechaB) { b.setAttribute('aria-pressed', 'false'); b.addEventListener('click', function () { cal.querySelectorAll('[aria-pressed]').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); this.setAttribute('aria-pressed', 'true'); fecha = fechaB; }); })(dd);
+      cal.appendChild(b);
+    }
+    pedido.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var out = pedido.querySelector('.p-out'), n = pedido.nombre.value.trim(), q = que.value.trim();
+      out.hidden = false;
+      if (!q) { que.focus(); out.innerHTML = '<b>Falta tu pedido</b>Arma tu queque, tu mesa de dulces o escríbelo.'; return; }
+      if (!n) { pedido.nombre.focus(); out.innerHTML = '<b>Falta tu nombre</b>Escríbelo para armar el mensaje.'; return; }
+      if (!fecha) { out.innerHTML = '<b>Falta la fecha</b>Toca un día disponible en el calendario.'; return; }
+      out.innerHTML = '<b>Así llegaría a tu WhatsApp:</b>';
+      out.appendChild(document.createTextNode('«Hola, soy ' + n + '. Quiero pedir: ' + q + '. Entrega: ' + pedido.entrega.value.toLowerCase() + ', el ' + fecha.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long' }) + '.»'));
+      out.appendChild(document.createElement('br'));
+      out.appendChild(document.createTextNode('(Es un ejemplo: en una web real, este botón abre WhatsApp con el pedido listo y los días llenos salen de la agenda de la pastelería).'));
+    });
+
+    // ---------- Asistente (demostración) ----------
+    var btn = $('.ai-btn'), box = $('#ai'), log = box.querySelector('.ai__log'), chips = box.querySelector('.ai__chips'), af = box.querySelector('.ai__form'), started = false;
+    var R = [
+      [/chilena/, 'La torta chilena cuesta desde $40: capas finas con dulce de leche.'],
+      [/fr[ií]a/, 'Las tortas frías cuestan desde $30, suaves y con merengue.'],
+      [/zanahoria/, 'El queque de zanahoria cuesta $28, con nueces y betún.'],
+      [/tartalet|fruta/, 'Las tartaletas de frutas cuestan $22 la docena.'],
+      [/navidad|navide/, 'Los quequitos de Navidad cuestan $20 la docena (en temporada).'],
+      [/galleta/, 'Las galletas de mantequilla cuestan $12 la bolsa de 24. ¡Y en tu primer pedido te regalamos una bolsa!'],
+      [/mesa|evento|boda|bautizo|baby|empresa/, 'Las mesas de dulces van desde $150 e incluyen montaje y decoración. Arma la tuya en la sección "Mesa de dulces" y ves el total al momento.'],
+      [/queque|torta|pastel|cumple/, 'Los queques van desde $35 (1 piso, 15 porciones), $75 (2 pisos) y $130 (3 pisos). Puedes diseñarlo en "Arma tu queque".'],
+      [/anticip|cu[aá]ndo|d[ií]as|urgente|ma[nñ]ana/, 'Pedimos 3 días de anticipación como mínimo. Para bodas y mesas grandes, una a dos semanas.'],
+      [/env[ií]o|domicilio|llevan|entreg/, 'Hacemos envíos en San José y alrededores por $5, o puedes retirar en la tienda.'],
+      [/pag|transfer|tarjeta|efectivo|adelant/, 'Apartas tu fecha con el 50 % por transferencia y pagas el resto al recibir.'],
+      [/az[uú]car|gluten|diab/, 'Sí, hacemos opciones sin azúcar y sin gluten por encargo.'],
+      [/horario|abren|abierto|domingo|lunes/, 'Abrimos de martes a sábado de 9:00 a. m. a 7:00 p. m. y domingos de 9:00 a. m. a 2:00 p. m. Los lunes cerramos.'],
+      [/d[oó]nde|direcci|ubica/, 'Estamos en Barrio Escalante, San José, del parque 100 m al este.']
+    ];
+    var CHIPS = ['¿Cuánto cuesta la torta chilena?', '¿Con cuántos días pido?', '¿Hacen envíos?', 'Mesa de dulces para boda'];
+    function msg(t, quien) { var m = document.createElement('div'); m.className = 'ai__m ai__m--' + quien; m.textContent = t; log.appendChild(m); log.scrollTop = log.scrollHeight; }
+    function responder(t) {
+      msg(t, 'yo');
+      var dots = document.createElement('div'); dots.className = 'ai__m ai__m--bot'; dots.innerHTML = '<span class="ai__dots"><i></i><i></i><i></i></span>'; log.appendChild(dots);
+      var x = t.toLowerCase(), hit = R.filter(function (r) { return r[0].test(x); })[0];
+      setTimeout(function () { dots.remove(); msg(hit ? hit[1] : 'Puedo ayudarte con precios, mesas de dulces, envíos, pagos y fechas. ¿Qué te gustaría saber?', 'bot'); }, 700 + Math.min(900, x.length * 18));
+    }
+    function abrir() { box.hidden = false; btn.hidden = true; btn.setAttribute('aria-expanded', 'true'); if (!started) { started = true; msg('¡Hola! Soy el asistente de Dulce Encanto. Pregúntame precios, fechas o cómo pedir.', 'bot'); CHIPS.forEach(function (c) { var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.addEventListener('click', function () { responder(c); }); chips.appendChild(b); }); } af.q.focus(); }
+    function cerrar() { box.hidden = true; btn.hidden = false; btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+    btn.addEventListener('click', abrir); box.querySelector('.ai__x').addEventListener('click', cerrar);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) cerrar(); });
+    af.addEventListener('submit', function (e) { e.preventDefault(); var t = af.q.value.trim(); if (t) { responder(t); af.q.value = ''; } });
+  })();
+  </script>
+</body>
+</html>

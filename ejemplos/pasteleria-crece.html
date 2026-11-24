@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paquete Crece · Dulce Encanto Pastelería · Ejemplo de Benemeo Studio</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Ejemplo de una web hecha por Benemeo Studio para una pastelería: arma tu queque en vivo, mesa de dulces, calculadora de invitados y calendario de entregas.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/ejemplos.css?v=20261116c">
+  <style>
+    /* Dulce Encanto: frambuesa, crema, chocolate y dorado */
+    .pas { --fr:#b4436c; --fr-2:#8f2f53; --rosa:#fbe9ee; --rosa-2:#f3c6d4; --crema:#fff8f2; --choc:#3b2420; --tinta:#3a2329; --gris:#6d5a5f; --oro:#d9a441;
+      --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; background:var(--crema); color:var(--tinta); }
+    .pas * { cursor:auto; }
+    .pas a, .pas button, .pas summary, .pas select, .pas label, .pas input[type=range], .pas input[type=checkbox], .pas input[type=radio] { cursor:pointer; }
+    .pas .wrap { max-width:1160px; }
+    .p-h { font-family:var(--serif); font-weight:500; letter-spacing:-.01em; line-height:1.06; margin:0; }
+    .p-h em { font-style:italic; color:var(--fr); }
+    .p-eye { text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; color:var(--fr); margin:0 0 .8rem; }
+    .p-lead { color:var(--gris); font-size:1.12rem; max-width:34em; }
+    .p-btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; padding:.7rem 1.5rem; border-radius:999px; background:var(--fr); color:#fff; font:inherit; font-weight:600; text-decoration:none; border:0; transition:background .25s, transform .25s; }
+    .p-btn:hover { background:var(--fr-2); transform:translateY(-2px); }
+    .p-btn--line { background:transparent; color:var(--tinta); border:1.5px solid rgba(58,35,41,.25); }
+    .p-btn--line:hover { background:#fff; color:var(--tinta); }
+
+    .p-head { position:sticky; top:0; z-index:20; background:rgba(255,248,242,.93); backdrop-filter:blur(10px); border-bottom:1px solid rgba(58,35,41,.08); }
+    .p-head .wrap { display:flex; align-items:center; gap:1.2rem; min-height:76px; }
+    .p-logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--tinta); line-height:1.1; }
+    .p-logo img { width:48px; height:48px; }
+    .p-logo b { display:block; font-family:var(--serif); font-weight:600; font-size:1.3rem; }
+    .p-logo small { display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gris); }
+    .p-nav { margin-left:auto; display:flex; gap:1.2rem; }
+    .p-nav a { color:var(--tinta); text-decoration:none; font-size:.93rem; }
+    .p-nav a:hover { color:var(--fr); }
+    .p-head .p-btn { min-height:44px; padding:.5rem 1.2rem; font-size:.93rem; }
+
+    /* Portada de cine */
+    .p-hero { position:relative; min-height:calc(100svh - 76px); display:grid; align-items:end; color:#fff; overflow:hidden; background:var(--choc); }
+    .p-hero__bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 50%; }
+    .p-hero::before { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(43,22,22,.9) 0%,rgba(43,22,22,.55) 50%,rgba(43,22,22,.1) 100%), linear-gradient(0deg,rgba(43,22,22,.5),transparent 45%); }
+    .p-hero .wrap { position:relative; z-index:2; display:grid; grid-template-columns:1.25fr .75fr; gap:2rem; align-items:center; padding:clamp(3rem,9vh,6rem) 0 clamp(4rem,11vh,7rem); }
+    .p-hero h1 { color:#fff; font-size:clamp(3.2rem,1.4rem + 6.4vw,7rem); line-height:.98; margin-bottom:1.2rem; }
+    .p-hero h1 em { color:#f6c1d1; }
+    .p-hero .p-eye { color:#f3c6d4; }
+    .p-hero .p-lead { color:rgba(255,255,255,.88); }
+    .p-cta { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.8rem 0 2rem; }
+    .p-hero .p-btn--line { color:#fff; border-color:rgba(255,255,255,.55); }
+    .p-hero .p-btn--line:hover { background:#fff; color:var(--tinta); }
+    .p-trust { display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; margin:0; padding:0; list-style:none; color:rgba(255,255,255,.85); font-size:.95rem; }
+    .p-trust li { display:flex; align-items:center; gap:.45rem; }
+    .p-trust li::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--oro); box-shadow:0 0 0 3px rgba(217,164,65,.25); }
+    .p-gift { justify-self:end; display:flex; gap:.9rem; align-items:center; max-width:21rem; background:#fff; color:var(--tinta); border-radius:20px; padding:1rem; box-shadow:0 18px 40px -18px rgba(0,0,0,.45); margin:0; animation:flota 6s ease-in-out infinite; }
+    .p-gift svg { width:64px; height:64px; flex:none; }
+    .p-gift b { display:block; font-family:var(--serif); font-size:1.15rem; color:var(--fr); }
+    .p-gift span { display:block; font-size:.9rem; color:var(--gris); line-height:1.4; }
+    @keyframes flota { 50% { transform:translateY(-10px); } }
+
+    .p-sec { scroll-margin-top:76px; padding:clamp(3.5rem,8vw,6.5rem) 0; }
+    .p-sec--rosa { background:var(--rosa); }
+    .p-sec--choc { background:var(--choc); color:#fff; }
+    .p-sec--choc .p-eye { color:#f3c6d4; } .p-sec--choc .p-h em { color:#f6c1d1; } .p-sec--choc .p-lead { color:rgba(255,255,255,.82); }
+    .p-sec h2 { font-size:clamp(2rem,1.3rem + 2.8vw,3.2rem); margin-bottom:.8rem; }
+    .p-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:1rem 2rem; margin-bottom:2.4rem; }
+    .p-top .p-lead { margin:0; }
+    .p-card-b { background:#fff; border-radius:28px; padding:clamp(1.3rem,3vw,2.2rem); box-shadow:0 30px 60px -40px rgba(58,35,41,.5); }
+
+    /* Arma tu queque */
+    .cons { display:grid; grid-template-columns:1fr 1.05fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
+    .cons__vista { position:sticky; top:96px; text-align:center; }
+    .cons__vista svg { width:100%; max-width:440px; height:auto; display:block; margin:0 auto; }
+    .cons__vista svg * { transition:fill .4s, opacity .4s, transform .5s cubic-bezier(.2,.7,.2,1); }
+    .cons__precio { font-family:var(--serif); font-size:2.4rem; color:var(--fr-2); margin:.6rem 0 0; }
+    .cons__precio small { display:block; font-family:inherit; font-size:.95rem; color:var(--gris); }
+    .op { border:0; padding:0; margin:0 0 1.3rem; min-width:0; }
+    .op legend { font-weight:700; font-size:.95rem; margin-bottom:.6rem; padding:0; }
+    .op__fila { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip input { position:absolute; opacity:0; }
+    .chip span { display:inline-flex; align-items:center; gap:.45rem; min-height:44px; padding:.45rem 1rem; border-radius:999px; border:1.5px solid rgba(58,35,41,.16); background:#fff; font-size:.93rem; transition:all .2s; }
+    .chip input:checked + span { background:var(--fr); border-color:var(--fr); color:#fff; }
+    .chip input:focus-visible + span { outline:3px solid var(--rosa-2); }
+    .chip i { width:16px; height:16px; border-radius:50%; border:1px solid rgba(0,0,0,.15); display:inline-block; }
+    .chip small { opacity:.75; }
+    .op input[type=text] { width:100%; box-sizing:border-box; min-height:48px; padding:.6rem .9rem; border-radius:14px; border:1.5px solid rgba(58,35,41,.18); background:var(--crema); font:inherit; }
+    .op input[type=text]:focus { outline:3px solid var(--rosa-2); border-color:var(--fr); }
+
+    /* ¿Cuántos invitados? */
+    .inv { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; }
+    .inv__n { font-family:var(--serif); font-size:4rem; line-height:1; color:var(--fr); }
+    .inv input[type=range] { width:100%; accent-color:var(--fr); height:32px; }
+    .inv__res { background:var(--rosa); border-radius:20px; padding:1.2rem 1.4rem; }
+    .inv__res h3 { font-family:var(--serif); font-weight:600; font-size:1.4rem; margin:0 0 .3rem; }
+    .inv__res p { margin:0 0 .8rem; color:var(--gris); }
+
+    /* Mesa de dulces */
+    .mesa { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
+    .mesa__foto img { width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; border-radius:28px; display:block; }
+    .mesa__items { list-style:none; margin:0 0 1rem; padding:0; }
+    .mesa__items li { display:grid; grid-template-columns:1fr auto auto; gap:.8rem; align-items:center; padding:.7rem 0; border-bottom:1px dashed rgba(58,35,41,.15); }
+    .mesa__items small { display:block; color:var(--gris); font-size:.82rem; }
+    .step { display:flex; align-items:center; gap:.3rem; }
+    .step button { width:36px; height:36px; border-radius:50%; border:1.5px solid var(--rosa-2); background:var(--rosa); color:var(--fr-2); font:inherit; font-weight:700; font-size:1.1rem; }
+    .step output { min-width:2.4rem; text-align:center; font-weight:700; }
+    .mesa__sub { min-width:4.5rem; text-align:right; color:var(--fr-2); font-weight:600; }
+    .mesa__total { display:flex; justify-content:space-between; align-items:baseline; font-family:var(--serif); font-size:1.8rem; color:var(--fr-2); margin:.4rem 0 1rem; }
+    .mesa__total span { font-family:inherit; font-size:1rem; color:var(--gris); }
+
+    /* Productos */
+    .prods { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+    .prod { background:#fff; border-radius:22px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 20px 40px -32px rgba(58,35,41,.5); transition:transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+    .prod:hover { transform:translateY(-6px); box-shadow:0 30px 50px -30px rgba(58,35,41,.55); }
+    .prod .m { overflow:hidden; } .prod img { width:100%; height:auto; aspect-ratio:1; object-fit:cover; display:block; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+    .prod:hover img { transform:scale(1.07); }
+    .prod > div:not(.m) { padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:.3rem; flex:1; }
+    .prod h3 { font-family:var(--serif); font-weight:600; font-size:1.2rem; margin:0; }
+    .prod p { margin:0; color:var(--gris); font-size:.92rem; }
+    .prod b { color:var(--fr-2); margin-top:auto; padding-top:.4rem; }
+    .prod .tag { align-self:flex-start; background:var(--oro); color:#fff; font-size:.72rem; font-weight:700; border-radius:999px; padding:.15rem .6rem; }
+
+    /* Sopla las velas */
+    .velas { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; position:relative; }
+    .velas svg { width:100%; max-width:380px; display:block; margin:0 auto; }
+    .velas__boton { background:none; border:0; padding:0; display:block; width:100%; }
+    .llama { transform-origin:center bottom; animation:titila .25s ease-in-out infinite alternate; transition:opacity .3s, transform .3s; }
+    .llama:nth-of-type(2) { animation-duration:.3s; } .llama:nth-of-type(3) { animation-duration:.22s; }
+    @keyframes titila { from { transform:scale(1,1) skewX(-3deg); } to { transform:scale(.92,1.08) skewX(3deg); } }
+    .apagadas .llama { opacity:0; transform:scale(.2); animation:none; }
+    .humo { opacity:0; }
+    .apagadas .humo { animation:humo 1.6s ease-out forwards; }
+    @keyframes humo { 0% { opacity:.7; transform:translateY(0); } 100% { opacity:0; transform:translateY(-40px); } }
+    #confeti { position:absolute; inset:-40px 0 0; width:100%; height:calc(100% + 40px); pointer-events:none; }
+
+    /* Galería por ocasión */
+    .oc { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.4rem; }
+    .oc button { min-height:44px; padding:.4rem 1.1rem; border-radius:999px; border:1.5px solid rgba(58,35,41,.16); background:#fff; font:inherit; font-size:.93rem; }
+    .oc button[aria-pressed="true"] { background:var(--fr); border-color:var(--fr); color:#fff; }
+    .gal { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+    .gal figure { margin:0; border-radius:20px; overflow:hidden; position:relative; transition:opacity .4s, transform .4s; }
+    .gal figure.fuera { display:none; }
+    .gal img { width:100%; height:auto; aspect-ratio:1; object-fit:cover; display:block; transition:transform .7s; }
+    .gal figure:hover img { transform:scale(1.05); }
+    .gal figcaption { position:absolute; left:.6rem; bottom:.6rem; background:rgba(58,35,41,.72); color:#fff; font-size:.78rem; font-weight:600; border-radius:999px; padding:.2rem .7rem; }
+
+    /* Frase */
+    .p-band { position:relative; padding:clamp(5rem,12vw,9rem) 0; color:#fff; background:var(--choc) url("../assets/ejemplo-pasteleria/franja.jpg") center/cover; }
+    .p-band::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(43,22,22,.88),rgba(43,22,22,.3)); }
+    .p-band .wrap { position:relative; }
+    .p-band p { font-family:var(--serif); font-style:italic; font-size:clamp(1.9rem,1.2rem + 3vw,3.4rem); line-height:1.15; max-width:15em; margin:0; }
+
+    /* Preguntas */
+    .p-faq { max-width:820px; }
+    .p-faq details { border-bottom:1px solid rgba(58,35,41,.12); }
+    .p-faq summary { list-style:none; display:flex; justify-content:space-between; gap:1rem; align-items:center; padding:1.2rem 0; font-weight:600; font-size:1.08rem; min-height:44px; }
+    .p-faq summary::-webkit-details-marker { display:none; }
+    .p-faq summary::after { content:"+"; font-size:1.5rem; color:var(--fr); transition:transform .25s; }
+    .p-faq details[open] summary::after { transform:rotate(45deg); }
+    .p-faq p { margin:0 0 1.2rem; color:var(--gris); }
+
+    /* Pedido y calendario */
+    .p-book .wrap { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(2rem,5vw,4rem); align-items:start; }
+    .p-info { display:grid; gap:1rem; margin-top:1.8rem; }
+    .p-info section { background:#fff; border-radius:20px; padding:1.2rem 1.4rem; }
+    .p-info h3 { font-family:var(--serif); font-weight:600; font-size:1.15rem; margin:0 0 .5rem; color:var(--fr-2); }
+    .p-info p { margin:0; color:var(--gris); }
+    .p-hours { width:100%; border-collapse:collapse; font-size:.95rem; }
+    .p-hours td { padding:.25rem 0; color:var(--gris); } .p-hours td + td { text-align:right; color:var(--tinta); font-weight:600; }
+    .p-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .p-form label { display:grid; gap:.35rem; font-weight:600; font-size:.92rem; }
+    .p-form .full { grid-column:1/-1; }
+    .p-form input:not([type=radio]), .p-form select { font:inherit; min-height:48px; padding:.6rem .9rem; border-radius:14px; border:1.5px solid rgba(58,35,41,.18); background:var(--crema); color:var(--tinta); width:100%; box-sizing:border-box; }
+    .p-form input:focus, .p-form select:focus { outline:3px solid var(--rosa-2); border-color:var(--fr); }
+    .resumen { grid-column:1/-1; background:var(--rosa); border-radius:16px; padding:.9rem 1.1rem; font-size:.93rem; margin:0; }
+    .cal { border:0; padding:0; margin:0; min-width:0; }
+    .cal legend { font-weight:600; font-size:.92rem; margin-bottom:.6rem; padding:0; }
+    .cal__grid { display:grid; grid-template-columns:repeat(7,1fr); gap:.35rem; }
+    .cal__grid .dow { text-align:center; font-size:.72rem; color:var(--gris); text-transform:uppercase; font-weight:700; }
+    .cal__grid button { min-height:46px; border-radius:12px; border:1.5px solid var(--rosa-2); background:#fff; font:inherit; font-weight:600; color:var(--tinta); padding:0; line-height:1.1; }
+    .cal__grid button small { display:block; font-size:.6rem; font-weight:600; color:var(--gris); }
+    .cal__grid button:disabled { background:#f1ebe7; border-color:#f1ebe7; color:#a3979a; cursor:not-allowed; }
+    .cal__grid button.lleno { text-decoration:line-through; }
+    .cal__grid button[aria-pressed="true"] { background:var(--fr); border-color:var(--fr); color:#fff; }
+    .cal__grid button[aria-pressed="true"] small { color:rgba(255,255,255,.85); }
+    .cal__ley { display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin:.7rem 0 0; font-size:.82rem; color:var(--gris); }
+    .cal__ley span { display:flex; align-items:center; gap:.35rem; } .cal__ley i { width:13px; height:13px; border-radius:4px; display:inline-block; }
+    .l-disp { background:#fff; border:1.5px solid var(--rosa-2); } .l-no { background:#f1ebe7; } .l-tu { background:var(--fr); }
+    .p-out { grid-column:1/-1; background:var(--rosa); border-radius:16px; padding:1rem 1.2rem; font-size:.95rem; margin:0; }
+    .p-out[hidden] { display:none; } .p-out b { display:block; margin-bottom:.3rem; color:var(--fr-2); }
+
+    /* Asistente y botones flotantes */
+    .ai-btn { position:fixed; right:18px; bottom:88px; z-index:31; display:flex; align-items:center; gap:.5rem; min-height:48px; padding:.5rem 1.1rem .5rem .8rem; border:0; border-radius:999px; background:linear-gradient(135deg,var(--fr),#d9648d); color:#fff; font:inherit; font-weight:600; box-shadow:0 14px 30px -10px rgba(180,67,108,.7); transition:transform .25s; }
+    .ai-btn:hover { transform:translateY(-2px); }
+    .ai-btn svg { width:22px; height:22px; fill:#fff; animation:brilla 2.4s ease-in-out infinite; }
+    @keyframes brilla { 50% { transform:scale(1.18) rotate(15deg); } }
+    .ai { position:fixed; right:18px; bottom:88px; z-index:40; width:min(380px,calc(100vw - 24px)); height:min(560px,calc(100svh - 120px)); display:flex; flex-direction:column; background:#fff; border-radius:24px; box-shadow:0 30px 70px -20px rgba(58,35,41,.55); overflow:hidden; }
+    .ai[hidden] { display:none; }
+    .ai__head { display:flex; align-items:center; gap:.7rem; padding:.9rem 1rem; background:linear-gradient(135deg,var(--fr),#d9648d); color:#fff; }
+    .ai__head small { display:block; font-size:.78rem; opacity:.85; }
+    .ai__av { width:38px; height:38px; border-radius:50%; background:#fff; display:grid; place-items:center; flex:none; } .ai__av img { width:30px; height:30px; }
+    .ai__x { margin-left:auto; width:40px; height:40px; border:0; border-radius:50%; background:rgba(255,255,255,.2); color:#fff; font-size:1rem; }
+    .ai__log { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:.6rem; background:var(--crema); }
+    .ai__m { max-width:85%; padding:.6rem .9rem; border-radius:16px; font-size:.95rem; line-height:1.45; }
+    .ai__m--bot { align-self:flex-start; background:#fff; border-bottom-left-radius:4px; box-shadow:0 4px 10px -8px rgba(58,35,41,.4); }
+    .ai__m--yo { align-self:flex-end; background:var(--fr); color:#fff; border-bottom-right-radius:4px; }
+    .ai__m a { display:inline-block; margin-top:.5rem; font-weight:600; color:var(--fr); }
+    .ai__dots { display:flex; gap:4px; } .ai__dots i { width:7px; height:7px; border-radius:50%; background:#e2a9bb; animation:punto 1s infinite; } .ai__dots i:nth-child(2) { animation-delay:.15s; } .ai__dots i:nth-child(3) { animation-delay:.3s; }
+    @keyframes punto { 50% { transform:translateY(-4px); opacity:.5; } }
+    .ai__chips { display:flex; gap:.4rem; overflow-x:auto; padding:.6rem 1rem 0; }
+    .ai__chips button { flex:none; min-height:36px; border:1.5px solid var(--rosa-2); background:var(--rosa); color:var(--fr-2); border-radius:999px; padding:.3rem .8rem; font:inherit; font-size:.85rem; font-weight:600; }
+    .ai__form { display:flex; gap:.5rem; padding:.7rem 1rem 1rem; }
+    .ai__form input { flex:1; min-height:46px; border-radius:999px; border:1.5px solid rgba(58,35,41,.18); padding:0 1rem; font:inherit; background:var(--crema); }
+    .ai__form button { width:46px; height:46px; border-radius:50%; border:0; background:var(--fr); display:grid; place-items:center; } .ai__form button svg { width:20px; height:20px; fill:#fff; }
+    .p-wa { position:fixed; right:18px; bottom:18px; z-index:30; width:58px; height:58px; border-radius:50%; background:#25d366; display:grid; place-items:center; box-shadow:0 12px 26px -8px rgba(0,0,0,.35); }
+    .p-wa svg { width:30px; height:30px; fill:#fff; }
+    .p-foot { background:var(--choc); color:rgba(255,255,255,.75); padding:2.4rem 0; font-size:.92rem; }
+    .p-foot .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:center; } .p-foot a { color:#fff; }
+
+    .fx [data-r] { opacity:0; transform:translateY(34px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0s); }
+    .fx [data-r].in { opacity:1; transform:none; }
+    .fx .p-hero h1 .w { display:inline-block; opacity:0; transform:translateY(.5em); animation:sube .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--d,0s); }
+    @keyframes sube { to { opacity:1; transform:none; } }
+    .fx .p-hero__bg { animation:acerca 2.4s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes acerca { from { transform:scale(1.12); filter:blur(6px); } to { transform:none; filter:none; } }
+
+    @media (max-width: 1100px) { .p-nav { gap:.8rem; } .p-nav a { font-size:.86rem; } .prods { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width: 960px) {
+      .p-nav { display:none; } .p-head .p-btn { margin-left:auto; }
+      .p-hero .wrap, .cons, .inv, .mesa, .velas, .p-book .wrap { grid-template-columns:1fr; }
+      .p-gift { justify-self:start; }
+      .cons__vista { position:static; }
+      .prods, .gal { grid-template-columns:1fr 1fr; }
+      .mesa__foto img { aspect-ratio:4/3; }
+      .ai-btn span { display:none; } .ai-btn { padding:0; width:58px; justify-content:center; }
+    }
+    @media (max-width: 520px) {
+      .p-logo small { display:none; } .p-form { grid-template-columns:1fr; } .p-cta .p-btn { width:100%; }
+      .mesa__items li { grid-template-columns:1fr auto; } .mesa__sub { grid-column:2; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pas *, .pas *::before { transition:none !important; animation:none !important; }
+      .fx [data-r] { opacity:1; transform:none; }
+    }
+    .ex-qr h3 { color:var(--fr-2); }
+  </style>
+</head>
+<body class="pas">
+  <div class="ribbon"><div class="wrap"><span>Ejemplo 2 · Dulce Encanto en paquete <b>Crece</b> (USD 460) · Así se vería una web hecha por Benemeo Studio</span><span><a data-back href="../index.html#paquetes">&larr; Volver</a> &nbsp;·&nbsp; <a href="../index.html?paquete=Crece#propuesta">Quiero este paquete</a></span></div></div>
+  <script data-volver>/* Volver: si vienes de la portada, regresa al instante y al mismo lugar */document.querySelectorAll('.ribbon a[data-back]').forEach(function(a){a.addEventListener('click',function(e){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){e.preventDefault();history.back();}}catch(x){}});});</script>
+
+  <header class="p-head"><div class="wrap">
+    <a class="p-logo" href="#inicio"><img src="../assets/ejemplo-pasteleria/logo-encanto.svg" width="48" height="48" alt=""><span><b>Dulce Encanto</b><small>Pastelería</small></span></a>
+    <nav class="p-nav" aria-label="Secciones">
+      <a href="#productos">Productos</a><a href="#ocasiones">Ocasiones</a><a href="#preguntas">Preguntas</a><a href="#pedido">Pedidos</a>
+    </nav>
+    <a class="p-btn" href="#pedido">Pedir</a>
+  </div></header>
+
+  <main id="inicio">
+    <section class="p-hero">
+      <img class="p-hero__bg" src="../assets/ejemplo-pasteleria/video-portada-poster.jpg" width="1280" height="720" alt="">
+      <div class="wrap">
+        <div>
+          <p class="p-eye">Pastelería artesanal · Hecho con cariño</p>
+          <h1 class="p-h">Dulces que <em>encantan</em></h1>
+          <p class="p-lead">Queques, tortas frías, torta chilena, tartaletas y mesas de dulces para toda ocasión.</p>
+          <div class="p-cta">
+            <a class="p-btn" href="#pedido">Hacer un pedido</a>
+            <a class="p-btn p-btn--line" href="#productos">Ver productos</a>
+          </div>
+          <ul class="p-trust"><li>Hecho a mano cada día</li><li>Retiro o envío</li><li>Pide con 3 días</li></ul>
+        </div>
+        <div class="p-gift"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="26" width="48" height="32" rx="6" fill="#fbe9ee" stroke="#b4436c" stroke-width="2.5"/><rect x="5" y="18" width="54" height="11" rx="4" fill="#b4436c"/><rect x="29" y="18" width="6" height="40" fill="#d9a441"/><path d="M32 18c-6-10-16-6-11 0M32 18c6-10 16-6 11 0" fill="none" stroke="#d9a441" stroke-width="3" stroke-linecap="round"/></svg><p><b>Regalo en tu primer pedido</b><span>Una bolsa de galletas de mantequilla va por nuestra cuenta.</span></p></div>
+      </div>
+    </section>
+
+    <section class="p-sec" id="productos"><div class="wrap">
+      <div class="p-top" data-r>
+        <div><p class="p-eye">Productos</p><h2 class="p-h">Para cada <em>antojo</em></h2></div>
+        <p class="p-lead">Precios de referencia en dólares.</p>
+      </div>
+      <div class="prods">
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/queques.jpg" width="667" height="1000" alt="Queque decorado de varios pisos" loading="lazy"></div><div><h3>Queques de ocasión</h3><p>Personalizados para tu fiesta.</p><b>desde $35</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/torta-fria.jpg" width="667" height="1000" alt="Torta fría con merengue rosado" loading="lazy"></div><div><h3>Tortas frías</h3><p>Suaves y cremosas, con merengue.</p><b>desde $30</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/torta-chilena.jpg" width="758" height="1000" alt="Porción de torta de capas con crema" loading="lazy"></div><div><h3>Torta chilena</h3><p>Capas finas con dulce de leche.</p><b>desde $40</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/queque-zanahoria.jpg" width="1000" height="667" alt="Queque de zanahoria con betún" loading="lazy"></div><div><h3>Queque de zanahoria</h3><p>Húmedo, con nueces y betún.</p><b>$28</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/tartaletas.jpg" width="1000" height="667" alt="Tartaletas de frutas frescas" loading="lazy"></div><div><h3>Tartaletas de frutas</h3><p>Crema pastelera y fruta fresca.</p><b>docena $22</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/quequitos-navidad.jpg" width="667" height="1000" alt="Queque navideño con velas" loading="lazy"></div><div><span class="tag">Temporada</span><h3>Quequitos de Navidad</h3><p>Con frutas confitadas.</p><b>docena $20</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/galletas.jpg" width="561" height="1000" alt="Galletas de mantequilla con mermelada" loading="lazy"></div><div><h3>Galletas de mantequilla</h3><p>Bolsa de 24 galletas.</p><b>$12</b></div></article>
+        <article class="prod" data-r><div class="m"><img src="../assets/ejemplo-pasteleria/dulces.jpg" width="667" height="1000" alt="Postres individuales surtidos" loading="lazy"></div><div><h3>Dulces surtidos</h3><p>Mini postres para compartir.</p><b>desde $15</b></div></article>
+      </div>
+    </div></section>
+
+    <section class="p-sec" id="ocasiones"><div class="wrap">
+      <div class="p-top" data-r><div><p class="p-eye">Galería por ocasión</p><h2 class="p-h">Para cada <em>celebración</em></h2></div></div>
+      <div class="gal" data-r>
+        <figure data-oc="cumple"><img src="../assets/ejemplo-pasteleria/g-cumple-1.jpg" width="1000" height="667" alt="Niña frente a su queque de cumpleaños" loading="lazy"><figcaption>Cumpleaños</figcaption></figure>
+        <figure data-oc="boda"><img src="../assets/ejemplo-pasteleria/g-boda-1.jpg" width="665" height="1000" alt="Queque de boda de varios pisos" loading="lazy"><figcaption>Boda</figcaption></figure>
+        <figure data-oc="bebe"><img src="../assets/ejemplo-pasteleria/g-baby-1.jpg" width="1000" height="667" alt="Mesa de baby shower en celeste" loading="lazy"><figcaption>Baby shower</figcaption></figure>
+        <figure data-oc="cumple"><img src="../assets/ejemplo-pasteleria/g-cumple-2.jpg" width="1000" height="667" alt="Queque de 50 años con confeti" loading="lazy"><figcaption>Cumpleaños</figcaption></figure>
+        <figure data-oc="empresa"><img src="../assets/ejemplo-pasteleria/g-empresa-1.jpg" width="667" height="1000" alt="Bocadillos dulces en un evento" loading="lazy"><figcaption>Empresa</figcaption></figure>
+        <figure data-oc="boda"><img src="../assets/ejemplo-pasteleria/g-boda-2.jpg" width="1000" height="667" alt="Queque de boda decorado con flores" loading="lazy"><figcaption>Boda</figcaption></figure>
+        <figure data-oc="bebe"><img src="../assets/ejemplo-pasteleria/g-bautizo-1.jpg" width="1000" height="667" alt="Mesa de dulces para bautizo" loading="lazy"><figcaption>Bautizo</figcaption></figure>
+        <figure data-oc="empresa"><img src="../assets/ejemplo-pasteleria/mesa-dulces-2.jpg" width="1000" height="667" alt="Mesa de postres elegante" loading="lazy"><figcaption>Empresa</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="p-band" aria-label="Frase"><div class="wrap"><p data-r>Todo sabe mejor cuando se comparte.</p></div></section>
+
+    <section class="p-sec p-sec--rosa" id="preguntas"><div class="wrap">
+      <div class="p-top" data-r><div><p class="p-eye">Preguntas</p><h2 class="p-h">Antes de tu <em>pedido</em></h2></div></div>
+      <div class="p-faq" data-r>
+        <details><summary>¿Con cuánta anticipación pido?</summary><p>Con 3 días como mínimo. Para bodas y mesas de dulces grandes, lo ideal es una a dos semanas.</p></details>
+        <details><summary>¿Cómo pago?</summary><p>Apartas tu fecha con el 50 % por transferencia y pagas el resto al recibir.</p></details>
+        <details><summary>¿Hacen envíos?</summary><p>Sí, en San José y alrededores, por $5. También puedes retirar en la tienda.</p></details>
+        <details><summary>¿Tienen opciones sin azúcar o sin gluten?</summary><p>Sí, por encargo. Escríbenos y te contamos qué sabores tenemos.</p></details>
+        <details><summary>¿Montan la mesa de dulces?</summary><p>Sí. El precio incluye el montaje y la decoración según la ocasión.</p></details>
+      </div>
+    </div></section>
+
+    <section class="p-sec p-book" id="pedido"><div class="wrap bk">
+      <div class="bk__head">
+        <p class="p-eye">Pedidos</p>
+        <h2 class="p-h">Haz tu <em>pedido</em></h2>
+      </div>
+      <div class="bk__main">
+        <p class="p-lead">Cuéntanos qué quieres y para qué fecha. Te confirmamos por WhatsApp.</p>
+        <form class="p-form p-card-b" id="pedido-f" data-r novalidate>
+        <label class="full">¿Qué quieres pedir?<input name="que" id="p-que" placeholder="Ej.: torta chilena para 20 personas"></label>
+        <label>Tu nombre<input name="nombre" autocomplete="given-name"></label>
+        <label>Entrega<select name="entrega"><option>Retiro en la tienda</option><option>Envío a domicilio (+$5)</option></select></label>
+        <label class="full">Fecha de entrega (con 3 días de anticipación)<input name="fecha" type="date"></label>
+        <div class="full"><button class="p-btn" type="submit">Enviar pedido por WhatsApp</button></div>
+        <p class="p-out" role="status" hidden></p>
+      </form>
+      </div>
+      <section class="ex-qr" aria-label="Código QR de WhatsApp">
+          <img src="../assets/qr-ejemplo.svg" width="200" height="200" alt="Código QR para escribir por WhatsApp">
+          <h3>Escanea y escríbenos por WhatsApp</h3>
+        </section>
+      <div class="p-info" data-r>
+          <section aria-labelledby="h-hor"><h3 id="h-hor">Horario de la tienda</h3>
+            <table class="p-hours"><tbody><tr><td>Martes a sábado</td><td>9:00 a. m. a 7:00 p. m.</td></tr><tr><td>Domingo</td><td>9:00 a. m. a 2:00 p. m.</td></tr><tr><td>Lunes</td><td>Cerrado</td></tr></tbody></table></section>
+          <section aria-labelledby="h-don"><h3 id="h-don">Dónde estamos</h3><p>Barrio Escalante, San José, del parque 100 m al este.</p></section>
+        </div>
+    </div></section>
+  </main>
+
+  <a class="p-wa" href="#pedido" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg></a>
+
+  <footer class="p-foot"><div class="wrap"><span>Dulce Encanto Pastelería · Queques, tortas y mesas de dulces</span><span>Ejemplo hecho por <a href="../index.html">Benemeo Studio</a></span></div></footer>
+
+  <script>
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.documentElement.classList.add('fx');
+    var items = [].slice.call(document.querySelectorAll('[data-r]'));
+    items.forEach(function (el) {
+      var sib = el.parentElement.querySelectorAll(':scope > [data-r]');
+      if (sib.length > 1) el.style.setProperty('--d', ([].indexOf.call(sib, el) % 3) * 0.12 + 's');
+    });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+  (function () {
+    var f = document.querySelector('#pedido-f'), out = document.querySelector('.p-out');
+    if (!f) return;
+    document.querySelectorAll('[data-servicio]').forEach(function (a) {
+      a.addEventListener('click', function () { if (f.servicio) f.servicio.value = a.getAttribute('data-servicio'); });
+    });
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var n = f.nombre ? f.nombre.value.trim() : '';
+      if (f.nombre && !n) { f.nombre.focus(); out.hidden = false; out.innerHTML = '<b>Falta tu nombre</b>Escríbelo para armar el mensaje.'; return; }
+      var msg = 'Hola, soy ' + n + '. Quiero pedir: ' + (f.que.value.trim() || 'un queque') + '. ' + f.entrega.value + (f.fecha.value ? ', para el ' + f.fecha.value.split('-').reverse().join('/') : '') + '.';
+      out.hidden = false;
+      out.innerHTML = '<b>Así llegaría a tu WhatsApp:</b>';
+      out.appendChild(document.createTextNode('«' + msg + '»'));
+      out.appendChild(document.createElement('br'));
+      out.appendChild(document.createTextNode('(Es un ejemplo: en una web real, este botón abre WhatsApp con el mensaje listo).'));
+    });
+  })();
+  </script>
+</body>
+</html>

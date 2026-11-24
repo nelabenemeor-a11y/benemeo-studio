@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu web en línea · Benemeo Studio</title>
+  <meta name="description" content="Lo que incluye tu plan y cómo pedir cambios.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0B1B3A">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* Página privada "Tu web en línea": se le manda a cada cliente al publicar. No va en el menú ni en el sitemap. */
+    .tw { background: var(--soft); }
+    .tw-hero { background: var(--navy); color: #fff; padding: 3.2rem 0 4.4rem; }
+    .tw-hero .eyebrow { color: #9db8f5; }
+    .tw-hero h1 { font-size: clamp(2rem, 1.2rem + 3.6vw, 3.2rem); color: #fff; }
+    .tw-hero p { max-width: 38rem; color: rgba(255,255,255,.8); margin: 0; }
+    .tw-wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+    .tw-sum { margin-top: -2.6rem; background: #fff; border-radius: 22px; box-shadow: 0 18px 40px rgba(11,27,58,.12); padding: 1.3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .tw-sum div { min-width: 0; }
+    .tw-sum span { display: block; font-size: var(--fs-label); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .tw-sum b { display: block; font-size: 1.1rem; margin-top: .15rem; overflow-wrap: anywhere; }
+    .tw-sum a { color: var(--accent); text-decoration: none; }
+    .tw-dots { display: flex; gap: .35rem; margin-top: .45rem; }
+    .tw-dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+    .tw-dots i.used { background: transparent; border: 2px solid var(--line); }
+    .tw-sec { padding: 2.6rem 0 0; }
+    .tw-sec h2 { font-size: clamp(1.4rem, 1.1rem + 1.4vw, 1.9rem); }
+    .tw-sec > p { color: var(--muted); margin-top: 0; }
+    .tw-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .tw-list li { background: #fff; border-radius: 14px; padding: .8rem 1rem .8rem 2.4rem; position: relative; border: 1px solid var(--line); }
+    .tw-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: .7rem; height: .38rem; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+    .tw-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .tw-card { background: #fff; border-radius: 18px; padding: 1.2rem 1.3rem; border: 1px solid var(--line); }
+    .tw-card h3 { margin-bottom: .2rem; }
+    .tw-card .tw-def { margin: 0 0 .7rem; color: var(--muted); font-size: var(--fs-small); }
+    .tw-card ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; font-size: .95rem; }
+    .tw-card .tw-price { margin: .9rem 0 0; padding-top: .8rem; border-top: 1px solid var(--line); font-size: var(--fs-small); color: var(--muted); }
+    .tw-card .tw-price b { color: var(--ink); font-size: 1.05rem; }
+    .tw-card--mod { border-top: 4px solid var(--accent); }
+    .tw-card--add { border-top: 4px solid #0f9d7a; }
+    .tw-note { margin: 1rem 0 0; font-size: var(--fs-small); color: var(--muted); }
+    .tw-steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: .6rem; }
+    .tw-steps li { counter-increment: s; background: #fff; border-radius: 14px; padding: .85rem 1rem .85rem 3.2rem; position: relative; border: 1px solid var(--line); }
+    .tw-steps li::before { content: counter(s); position: absolute; left: .9rem; top: .8rem; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; font-size: .85rem; display: grid; place-items: center; }
+    .tw-wa { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; min-height: 48px; }
+    .tw-time { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--line); margin-left: .5rem; }
+    .tw-time li { position: relative; padding: 0 0 1.2rem 1.4rem; }
+    .tw-time li::before { content: ""; position: absolute; left: -7px; top: .35rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+    .tw-time li:last-child { padding-bottom: 0; }
+    .tw-time li:last-child::before { background: #c2410c; }
+    .tw-time b { display: block; }
+    .tw-time span { color: var(--muted); font-size: .95rem; }
+    .tw-alert { margin: 1.4rem 0 0; padding: .95rem 1.1rem; border-radius: 14px; background: #fff7ed; border: 1px solid #fed7aa; border-left: 4px solid #c2410c; font-size: .95rem; }
+    .tw-alert b { color: #9a3412; }
+    .tw-pay { background: #fff; border-radius: 18px; padding: 1.1rem 1.3rem; border: 1px solid var(--line); }
+    .tw-pay p { margin: 0; }
+    .tw-end { padding: 2.6rem 0 3rem; }
+    @media (max-width: 680px) {
+      .tw-sum { grid-template-columns: 1fr; }
+      .tw-list, .tw-two { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="tw">
+  <!--
+    DATOS DE CADA CLIENTE: para un cliente nuevo, copiar este archivo con un nombre difícil de adivinar
+    (por ejemplo clientes/dulce-encanto-k7p2.html) y cambiar solo estos datos.
+      negocio: nombre del negocio
+      dominio: su .com, sin https://
+      hasta:   último día del año ya pagado (año-mes-día)
+      anio:    1 si es el primer año (3 modificaciones), 2 o más desde el segundo (2 modificaciones)
+      usadas:  cuántas modificaciones ya usó este año
+  -->
+  <script>
+    var CLIENTE = { negocio: 'Dulce Encanto Pastelería', dominio: 'dulceencanto.com', hasta: '2027-11-04', anio: 1, usadas: 1 };
+  </script>
+
+  <header class="tw-hero">
+    <div class="tw-wrap">
+      <a class="brand" href="../index.html" aria-label="Benemeo Studio"><span class="logo-wrap"><img src="../assets/logo-monograma.svg" width="32" height="32" alt=""></span><span style="color:#fff">Benemeo <em>Studio</em></span></a>
+      <p class="eyebrow" style="margin-top:2rem">Tu web en línea</p>
+      <h1>Hola, <span data-c="negocio"></span>.</h1>
+      <p>Tu web ya está publicada. Aquí tienes lo que incluye tu plan y cómo pedirme cambios. Guarda este enlace.</p>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <div class="tw-wrap">
+      <section class="tw-sum" aria-label="Resumen de tu plan">
+        <div><span>Tu web</span><b><a data-c="link" href="#"></a></b></div>
+        <div><span>Pagado hasta</span><b data-c="hasta"></b></div>
+        <div><span>Modificaciones este año</span><b data-c="quedan"></b><div class="tw-dots" data-c="dots" aria-hidden="true"></div></div>
+      </section>
+
+      <section class="tw-sec" aria-labelledby="h-incluye">
+        <h2 id="h-incluye">Qué incluye tu plan</h2>
+        <ul class="tw-list">
+          <li>Tu web en internet, con su .com</li>
+          <li>Segura, con candado</li>
+          <li>Copias de seguridad</li>
+          <li><span data-c="incl"></span></li>
+        </ul>
+      </section>
+
+      <section class="tw-sec" aria-labelledby="h-cambios">
+        <h2 id="h-cambios">Dos tipos de cambio</h2>
+        <p>Así sabes siempre qué entra en tu plan y qué se cobra aparte.</p>
+        <div class="tw-two">
+          <article class="tw-card tw-card--mod">
+            <h3>Modificación</h3>
+            <p class="tw-def">Cambiar algo que ya está. Por ejemplo:</p>
+            <ul>
+              <li>1 precio, horario o dato de contacto</li>
+              <li>1 foto reemplazada</li>
+              <li>1 texto de hasta 30 palabras</li>
+            </ul>
+            <p class="tw-note">Varios precios u horarios de una misma lista, en un solo pedido, cuentan como 1 modificación (hasta 10).</p>
+            <p class="tw-price">Incluidas en tu plan. Si ya las usaste: <b>USD 10</b> cada una.</p>
+          </article>
+          <article class="tw-card tw-card--add">
+            <h3>Agregado</h3>
+            <p class="tw-def">Sumar algo nuevo. Por ejemplo:</p>
+            <ul>
+              <li>1 servicio o producto: nombre, foto, precio y hasta 30 palabras</li>
+              <li>1 horario, fecha o sucursal nueva</li>
+              <li>1 foto nueva en la galería</li>
+              <li>1 texto nuevo de hasta 100 palabras</li>
+            </ul>
+            <p class="tw-price">Se cobra aparte: <b>USD 20</b> cada uno.</p>
+          </article>
+        </div>
+        <p class="tw-note">¿Quieres algo más grande, como una sección o una función nueva? Te lo cotizo antes de empezar.</p>
+      </section>
+
+      <section class="tw-sec" aria-labelledby="h-pedir">
+        <h2 id="h-pedir">Cómo pedirme un cambio</h2>
+        <ol class="tw-steps">
+          <li>Escríbeme por WhatsApp, todo en un solo mensaje.</li>
+          <li>Mándame lo nuevo: el texto, la foto o el precio.</li>
+          <li>Te digo si es modificación o agregado, y su precio, antes de hacerlo.</li>
+          <li>Te aviso cuando ya esté en tu web.</li>
+        </ol>
+        <a class="btn btn--primary tw-wa" data-c="wa" href="https://wa.me/50662929038" target="_blank" rel="noopener">Pedir un cambio por WhatsApp</a>
+      </section>
+
+      <section class="tw-sec" aria-labelledby="h-renueva">
+        <h2 id="h-renueva">Cuando se acerca la renovación</h2>
+        <p>Tu plan se renueva cada año por <b>USD 120</b> e incluye 2 modificaciones al año.</p>
+        <ol class="tw-time">
+          <li><b data-c="aviso"></b><span>Te escribo para recordarte la renovación.</span></li>
+          <li><b data-c="plazo"></b><span>Último día para pagar. Si pagas, tu web sigue igual y no tienes que hacer nada más.</span></li>
+          <li><b data-c="vence"></b><span>Si no se pagó, tu web deja de verse en internet.</span></li>
+        </ol>
+        <p class="tw-alert"><b>Importante:</b> si pagas después del <span data-c="vence"></span>, tu dirección <span data-c="dominio"></span> puede perderse y quedar libre para que otra persona la compre. Si eso pasa, hay que buscar una dirección nueva y volver a instalar tu web, con un costo de <b>USD 185</b> además de la renovación.</p>
+      </section>
+
+      <section class="tw-sec tw-end" aria-labelledby="h-pago">
+        <h2 id="h-pago">Cómo pagar</h2>
+        <div class="tw-pay"><p>SINPE Móvil, transferencia, PayPal o Binance. Te envío los datos por WhatsApp.</p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="wrap footer__in">
+    <a class="brand" href="../index.html"><span class="logo-wrap"><img src="../assets/logo-monograma.svg" width="32" height="32" alt=""></span><span>Benemeo <em>Studio</em></span></a>
+    <p class="footer__sign"><span class="u">MARIANELA BENEMEO</span> – COSTA RICA</p>
+    <a class="footer__priv" href="../privacidad.html">Política de privacidad</a>
+  </div></footer>
+
+  <script>
+    (function () {
+      'use strict';
+      var c = CLIENTE, total = c.anio > 1 ? 2 : 3, quedan = Math.max(0, total - c.usadas);
+      var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      function fecha(d) { return d.getDate() + ' de ' + meses[d.getMonth()] + ' de ' + d.getFullYear(); }
+      function antes(d, m) { var x = new Date(d); x.setMonth(x.getMonth() - m); return x; }
+      var p = c.hasta.split('-'), hasta = new Date(+p[0], p[1] - 1, +p[2]);
+      function put(k, v) { document.querySelectorAll('[data-c="' + k + '"]').forEach(function (el) { el.textContent = v; }); }
+      put('negocio', c.negocio);
+      put('hasta', fecha(hasta));
+      put('quedan', 'Te quedan ' + quedan + ' de ' + total);
+      put('incl', total + ' modificaciones ' + (c.anio > 1 ? 'al año' : 'en tu primer año'));
+      put('aviso', fecha(antes(hasta, 2)));
+      put('plazo', fecha(antes(hasta, 1)));
+      put('vence', fecha(hasta));
+      put('dominio', c.dominio);
+      var a = document.querySelector('[data-c="link"]');
+      a.textContent = c.dominio; a.href = 'https://' + c.dominio;
+      var dots = document.querySelector('[data-c="dots"]');
+      for (var i = 0; i < total; i++) { var d = document.createElement('i'); if (i >= quedan) d.className = 'used'; dots.appendChild(d); }
+      document.querySelector('[data-c="wa"]').href = 'https://wa.me/50662929038?text=' + encodeURIComponent('Hola Marianela, quiero pedir un cambio en mi web ' + c.dominio + ':');
+    })();
+  </script>
+</body>
+</html>

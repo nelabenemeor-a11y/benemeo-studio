@@ -1,0 +1,99 @@
+/* Mini webs de ejemplo (Benemeo Studio) */
+:root { --bg:#fff; --ink:#222; --accent:#2563EB; --soft:#eef3ff; --muted:#5b6070; --cur:pointer; }
+.th-spa { --bg:#f6fcfb; --ink:#2d2450; --accent:#6c54b4; --soft:#e3f4f1; --muted:#5b5478; --cur:pointer; --pink:#d75a9b; }
+.th-cake { --bg:#fff8f4; --ink:#4a2a33; --accent:#d85f8c; --soft:#fbe4ec; --muted:#7a5a64; --cur:pointer; }
+.th-dance { --bg:#f7f4ff; --ink:#2a1f5a; --accent:#5b34c9; --soft:#e8e0ff; --muted:#5d5683; --cur:pointer; }
+*,*::before,*::after { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+body, body * { cursor:pointer; }
+a, button, summary, select { cursor:pointer; }
+input, textarea { cursor:text; }
+a { color:var(--accent); }
+img,svg { max-width:100%; }
+:focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:6px; }
+.wrap { width:min(100% - 32px,1060px); margin-inline:auto; }
+.ribbon { background:#0B1B3A; color:#fff; font-size:.9rem; padding:.6rem 0; }
+.ribbon .wrap { display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; justify-content:space-between; align-items:center; }
+.ribbon a { color:#9db8f5; font-weight:600; text-decoration:none; }
+.ribbon a:hover { color:#fff; }
+.x-head { display:flex; align-items:center; justify-content:space-between; padding:1.1rem 0; }
+.x-logo { font-weight:700; font-size:1.25rem; letter-spacing:-.02em; display:flex; gap:.6rem; align-items:center; }
+.x-logo i { width:2rem; height:2rem; border-radius:50%; background:var(--accent); display:inline-grid; place-items:center; color:#fff; font-style:normal; font-size:.95rem; }
+.x-nav { display:flex; gap:1.4rem; font-size:.95rem; } .x-nav a { color:var(--ink); text-decoration:none; } .x-nav a:hover { color:var(--accent); }
+.x-hero { display:grid; grid-template-columns:1.1fr .9fr; gap:2rem; align-items:center; padding:clamp(2rem,6vw,5rem) 0; }
+.x-hero small { text-transform:uppercase; letter-spacing:.14em; font-weight:600; color:var(--accent); font-size:.8rem; }
+.x-hero h1 { font-size:clamp(2.4rem,1.3rem + 4.5vw,4.4rem); line-height:1; letter-spacing:-.03em; margin:.6rem 0 1rem; }
+.x-hero h1 em { font-family:Georgia,"Times New Roman",serif; font-weight:400; color:var(--accent); }
+.x-hero p { color:var(--muted); font-size:1.15rem; max-width:30em; }
+.x-btn { display:inline-flex; align-items:center; min-height:48px; padding:.7rem 1.6rem; border-radius:999px; background:var(--accent); color:#fff; font:inherit; font-weight:600; text-decoration:none; border:0; transition:transform .3s, box-shadow .3s; }
+.x-btn:hover { transform:translateY(-2px); box-shadow:0 14px 30px -12px var(--accent); }
+.x-art { aspect-ratio:1; border-radius:38% 62% 55% 45% / 50% 40% 60% 50%; background:var(--soft); display:grid; place-items:center; overflow:hidden; animation:morph 9s ease-in-out infinite alternate; }
+.x-art svg { width:56%; height:56%; }
+@keyframes morph { to { border-radius:55% 45% 40% 60% / 45% 55% 45% 55%; } }
+.x-sec { padding:clamp(2.2rem,5vw,4rem) 0; }
+.x-sec h2 { font-size:clamp(1.7rem,1.2rem + 2vw,2.6rem); letter-spacing:-.02em; margin:0 0 1.4rem; }
+.cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.card { background:#fff; border-radius:22px; padding:1.5rem; box-shadow:0 10px 30px -18px rgba(0,0,0,.25); transition:transform .3s; }
+.card:hover { transform:translateY(-4px); }
+.card h3 { margin:.6rem 0 .3rem; font-size:1.2rem; } .card p { margin:0; color:var(--muted); font-size:.98rem; }
+.card .ic { width:3rem; height:3rem; border-radius:16px; background:var(--soft); display:grid; place-items:center; color:var(--accent); font-weight:700; }
+.tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:.8rem; }
+.tile { aspect-ratio:1; border-radius:20px; background:linear-gradient(135deg,var(--soft),#fff); border:1px dashed var(--accent); display:grid; place-items:center; text-align:center; font-size:.85rem; color:var(--muted); padding:.8rem; }
+.sched { width:100%; border-collapse:collapse; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 10px 30px -18px rgba(0,0,0,.25); }
+.sched th,.sched td { padding:.9rem 1.1rem; text-align:left; border-bottom:1px solid #eee; } .sched th { background:var(--soft); }
+.x-form { background:#fff; border-radius:26px; padding:clamp(1.3rem,3vw,2rem); display:grid; grid-template-columns:1fr 1fr; gap:1rem; box-shadow:0 18px 40px -24px rgba(0,0,0,.35); }
+.x-form label { font-weight:600; font-size:.92rem; display:grid; gap:.35rem; }
+.x-form input,.x-form select { font:inherit; padding:.7rem .9rem; border:1.5px solid #cfd3da; border-radius:12px; min-height:46px; width:100%; }
+.x-form .full { grid-column:1/-1; }
+.x-note { margin:.8rem 0 0; font-weight:600; color:var(--accent); min-height:1.4em; }
+.x-foot { padding:2rem 0 3rem; color:var(--muted); font-size:.92rem; text-align:center; }
+@media (max-width:760px) { .x-hero,.cards,.x-form { grid-template-columns:1fr; } .tiles { grid-template-columns:repeat(2,1fr); } .x-nav { display:none; } .x-art { max-width:260px; margin:0 auto; } }
+@media (prefers-reduced-motion:reduce) { .x-art { animation:none; } * { transition:none !important; } html { scroll-behavior:auto; } }
+
+/* Bene Natural Spa: logo y detalles con los colores de su Instagram */
+.th-spa .x-logo i { background:#6c54b4; font-family:Georgia,"Times New Roman",serif; font-size:1.2rem; box-shadow:0 0 0 3px #e3f4f1, 0 0 0 4px #bfe3dc; }
+.spa-word { display:grid; line-height:1; margin-left:.1rem; }
+.spa-word em { font-family:Georgia,"Times New Roman",serif; font-style:italic; font-weight:400; font-size:1.55rem; color:#d75a9b; line-height:.9; }
+.spa-word small { font-size:.58rem; letter-spacing:.2em; color:#d75a9b; font-weight:700; margin-top:.2rem; }
+.th-spa .card .ic { background:#fbe7f1; color:#d75a9b; }
+.th-spa .tile { border-color:#d75a9b; }
+.th-spa .x-btn:hover { box-shadow:0 14px 30px -12px #d75a9b; }
+.th-spa .x-note { color:#d75a9b; }
+
+/* Spa: logo real y años de experiencia */
+.spa-logo { display:block; border-radius:50%; box-shadow:0 4px 14px -6px rgba(45,36,80,.4); }
+.x-hero .x-exp { display:inline-block; background:var(--soft); color:var(--accent); border-radius:999px; padding:.3rem 1rem; font-weight:700; font-size:.95rem; margin:0 0 1.2rem; }
+
+/* Reserva en 3 columnas (igual en Despega, Crece y Ultra Plus):
+   arriba el título; abajo: reserva o botón | QR de WhatsApp | horario y ubicación */
+section > .wrap.bk { display: grid; grid-template-columns: minmax(0, 1.15fr) 240px minmax(0, .95fr);
+  grid-template-areas: "head head head" "main qr info"; gap: 1.4rem 2rem; align-items: start; }
+.bk__head { grid-area: head; }
+.bk__head h2 { margin-bottom: 0; }
+.bk__main { grid-area: main; min-width: 0; }
+.bk__main > p:first-child { margin-top: 0; }
+.wrap.bk > [class*="-info"] { grid-area: info; margin-top: 0; }
+/* Horarios: el día y la hora juntos, no en los extremos */
+.wrap.bk [class*="-hours"] { width: auto; }
+.wrap.bk [class*="-hours"] td { white-space: nowrap; }
+.wrap.bk [class*="-hours"] td + td { text-align: left; padding-left: 1rem; }
+
+/* QR de WhatsApp (en los ejemplos lleva al WhatsApp de Benemeo Studio) */
+.ex-qr { grid-area: qr; background: #fff; border-radius: 20px; padding: 1.2rem; text-align: center; }
+.ex-qr img { display: block; width: 200px; height: 200px; margin: 0 auto; background: #fff; image-rendering: pixelated; }
+.ex-qr h3 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; line-height: 1.3; margin: .8rem 0 0; }
+.ex-qr p { margin: 0; font-size: .92rem; line-height: 1.4; }
+.ex-qr .ex-qr__nota { margin-top: .5rem; font-size: .8rem; opacity: .75; }
+
+@media (max-width: 1100px) {
+  section > .wrap.bk { grid-template-columns: minmax(0, 1fr) 280px; grid-template-areas: "head head" "main qr" "main info"; }
+  .ex-qr { justify-self: center; width: 240px; box-sizing: border-box; }
+  .wrap.bk [class*="-hours"] td:first-child { white-space: normal; }
+}
+@media (max-width: 900px) {
+  section > .wrap.bk { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "main" "qr" "info"; }
+  .ex-qr { justify-self: start; }
+  .wrap.bk [class*="-hours"] td:first-child { white-space: nowrap; }
+}
+@media (max-width: 720px) { .ex-qr { display: none !important; } } /* en el celular se usa el botón de WhatsApp */
